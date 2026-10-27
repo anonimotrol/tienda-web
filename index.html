@@ -80,11 +80,11 @@
 
         .header-actions {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             align-items: center;
         }
 
-        .cart-btn {
+        .cart-btn, .menu-icon {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             padding: 8px 12px;
@@ -94,7 +94,8 @@
             position: relative;
             display: flex;
             align-items: center;
-            gap: 6px;
+            justify-content: center;
+            font-size: 18px;
         }
 
         .cart-badge {
@@ -111,15 +112,6 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-        }
-
-        .menu-icon {
-            font-size: 20px;
-            cursor: pointer;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 8px 12px;
-            border-radius: 12px;
         }
 
         /* Contenedor Principal */
@@ -158,12 +150,48 @@
             color: var(--text-muted);
         }
 
-        /* Menú de Navegación Estilo Lista */
+        /* Menú Lateral (Drawer de Tres Rayas) */
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100%;
+            background: var(--bg-color);
+            border-right: 1px solid var(--border-color);
+            z-index: 1001;
+            transition: 0.3s ease-in-out;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .drawer.open {
+            left: 0;
+        }
+
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .close-drawer {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
         .nav-links {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-bottom: 20px;
+            gap: 10px;
         }
 
         .nav-item {
@@ -178,6 +206,7 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 14px;
+            cursor: pointer;
             transition: 0.2s;
         }
 
@@ -259,6 +288,7 @@
             font-size: 12px;
             color: var(--neon-cyan);
             text-decoration: none;
+            cursor: pointer;
         }
 
         .categories-grid {
@@ -492,6 +522,7 @@
         .footer-links a {
             color: var(--text-muted);
             text-decoration: none;
+            cursor: pointer;
         }
 
         /* Carrito Modal (Sidebar Lateral) */
@@ -504,7 +535,7 @@
             height: 100%;
             background: var(--bg-color);
             border-left: 1px solid var(--border-color);
-            z-index: 1000;
+            z-index: 1002;
             transition: 0.3s ease-in-out;
             padding: 20px;
             display: flex;
@@ -524,7 +555,7 @@
             margin-bottom: 15px;
         }
 
-        .close-cart {
+        .close-btn {
             background: none;
             border: none;
             color: white;
@@ -563,7 +594,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.7);
-            z-index: 999;
+            z-index: 1000;
             display: none;
         }
 
@@ -581,7 +612,7 @@
 
     <!-- Header -->
     <header>
-        <div class="logo-container">
+        <div class="logo-container" onclick="scrollToTop()" style="cursor: pointer;">
             <div class="logo">☁️ NEOVAPE</div>
             <div class="logo-sub">Cyber Labs v2.0</div>
         </div>
@@ -589,26 +620,32 @@
             <button class="cart-btn" onclick="toggleCart()">
                 🛒 <span class="cart-badge" id="cart-count">0</span>
             </button>
-            <div class="menu-icon" onclick="alert('Menú principal desplegado')">☰</div>
+            <div class="menu-icon" onclick="toggleDrawer()">☰</div>
         </div>
     </header>
+
+    <!-- Menú Desplegable Lateral (Drawer) -->
+    <div class="drawer" id="main-drawer">
+        <div class="drawer-header">
+            <div class="logo">☁️ NEOVAPE</div>
+            <button class="close-drawer" onclick="toggleDrawer()">✕</button>
+        </div>
+        <div class="nav-links">
+            <a class="nav-item" onclick="navigate('Inicio')">🏠 Inicio</a>
+            <a class="nav-item" onclick="navigate('Catálogo Completo')">📦 Catálogo Completo</a>
+            <a class="nav-item" onclick="navigate('Vapes Desechables')">💨 Vapes Desechables</a>
+            <a class="nav-item" onclick="navigate('Pod Systems')">🔋 Pod Systems</a>
+            <a class="nav-item vip" onclick="navigate('Secret VIP Discount')">🔥 Secret VIP Discount (90% OFF)</a>
+        </div>
+    </div>
 
     <!-- Contenido Principal -->
     <div class="container">
 
-        <!-- Buscador -->
+        <!-- Buscador Interactivo -->
         <div class="search-box">
             <span>🔍</span>
-            <input type="text" placeholder="Buscar en la tienda..." id="search-input">
-        </div>
-
-        <!-- Menú Estilo Lista -->
-        <div class="nav-links">
-            <a href="#" class="nav-item">🏠 Inicio</a>
-            <a href="#" class="nav-item">📦 Catálogo Completo</a>
-            <a href="#" class="nav-item">💨 Vapes Desechables</a>
-            <a href="#" class="nav-item">🔋 Pod Systems</a>
-            <a href="#" class="nav-item vip">🔥 Secret VIP Discount (90% OFF)</a>
+            <input type="text" placeholder="Buscar en la tienda..." id="search-input" onkeyup="filterProducts()">
         </div>
 
         <!-- Banner Promocional -->
@@ -616,32 +653,32 @@
             <span class="promo-tag">Oferta Exclusiva</span>
             <div class="promo-title">¿Quieres un Vape GRATIS para tu primer pedido?</div>
             <div class="promo-desc">Resuelve nuestro acertijo VIP o dale click al botón para reclamar tu cupón especial del 100%.</div>
-            <button class="btn-neon" onclick="alert('¡Cupón aplicado con éxito!')">🎁 Reclamar Vape Gratis</button>
+            <button class="btn-neon" onclick="claimGift()">🎁 Reclamar Vape Gratis</button>
         </div>
 
         <!-- Categorías Destacadas -->
         <div class="section-header">
             <div class="section-title">Categorías Destacadas</div>
-            <a href="#" class="see-all">Ver todas →</a>
+            <a class="see-all" onclick="filterByCategory('todos')">Ver todas →</a>
         </div>
 
         <div class="categories-grid">
-            <div class="cat-card">
+            <div class="cat-card" onclick="filterByCategory('Vapes')">
                 <div class="cat-icon">⚡</div>
                 <div class="cat-name">Vapes Desechables</div>
                 <div class="cat-desc">Hasta 30,000 Puffs con pantalla</div>
             </div>
-            <div class="cat-card">
+            <div class="cat-card" onclick="filterByCategory('Pods')">
                 <div class="cat-icon">🔋</div>
                 <div class="cat-name">Sistemas Pod</div>
                 <div class="cat-desc">Recargables y compactos</div>
             </div>
-            <div class="cat-card">
+            <div class="cat-card" onclick="filterByCategory('Liquids')">
                 <div class="cat-icon">🧪</div>
                 <div class="cat-name">E-Liquids Premium</div>
                 <div class="cat-desc">Sales de Nicotina y Base Free</div>
             </div>
-            <div class="cat-card" style="border-color: var(--neon-pink);">
+            <div class="cat-card" style="border-color: var(--neon-pink);" onclick="filterByCategory('VIP')">
                 <div class="cat-icon">👑</div>
                 <div class="cat-name" style="color: var(--neon-pink);">Ediciones Limitadas</div>
                 <div class="cat-desc">Sabores secretos VIP 🔑</div>
@@ -653,42 +690,12 @@
             <div class="section-title">Lo más vendido de la semana</div>
         </div>
 
-        <div class="products-grid">
+        <div class="products-grid" id="products-container">
             <!-- Producto 1 -->
-            <div class="product-card">
+            <div class="product-card" data-name="cybervapor 25k ultra" data-category="Vapes">
                 <div class="product-badge">Más Vendido</div>
                 <div class="product-age">18+ ONLY</div>
                 <div class="product-img-box">
                     <div class="vape-mock">
                         <div class="vape-top"></div>
-                        <div class="vape-label">VAPES</div>
-                        <div class="vape-screen">NEO 2026</div>
-                    </div>
-                </div>
-                <div class="product-category">Vapes</div>
-                <div class="product-name">CyberVapor 25K Ultra</div>
-                <div class="product-rating">★★★★☆ <span>(4.9)</span></div>
-                <div class="product-footer">
-                    <div class="price-box">
-                        <span class="current-price">$24.99</span>
-                        <span class="old-price">$34.99</span>
-                    </div>
-                    <button class="add-cart-btn" onclick="addToCart('CyberVapor 25K Ultra', 24.99)">🛒</button>
-                </div>
-            </div>
-
-            <!-- Producto 2 -->
-            <div class="product-card">
-                <div class="product-badge new">Nuevo</div>
-                <div class="product-age">18+ ONLY</div>
-                <div class="product-img-box">
-                    <div class="vape-mock cyan">
-                        <div class="vape-top"></div>
-                        <div class="vape-label">PODS</div>
-                        <div class="vape-screen">SMART LCD</div>
-                    </div>
-                </div>
-                <div class="product-category">Pods</div>
-                <div class="product-name">Neon Pod Pro X</div>
-                <div class="product-rating">★★★★★ <span>(4.8)</span></div>
                
