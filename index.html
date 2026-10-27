@@ -122,15 +122,6 @@
             padding: 15px;
         }
 
-        /* Vistas / Secciones */
-        .view-section {
-            display: none;
-        }
-
-        .view-section.active {
-            display: block;
-        }
-
         /* Buscador */
         .search-box {
             position: relative;
@@ -224,11 +215,6 @@
             border-color: var(--neon-cyan);
         }
 
-        .nav-item.vip {
-            background: linear-gradient(135deg, rgba(255,0,127,0.2), rgba(157,0,255,0.2));
-            border-color: var(--neon-pink);
-        }
-
         /* Banner Promocional / Punto Fijo */
         .promo-box {
             background: linear-gradient(135deg, #141124, #1f1538);
@@ -297,13 +283,6 @@
             font-weight: bold;
         }
 
-        .see-all {
-            font-size: 12px;
-            color: var(--neon-cyan);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -341,7 +320,7 @@
             color: var(--text-muted);
         }
 
-        /* Productos Destacados / Tarjetas */
+        /* Productos Destacados */
         .products-grid {
             display: flex;
             flex-direction: column;
@@ -367,11 +346,6 @@
             padding: 3px 8px;
             border-radius: 6px;
             text-transform: uppercase;
-        }
-
-        .product-badge.new {
-            background: var(--neon-cyan);
-            color: #000;
         }
 
         .product-age {
@@ -409,16 +383,6 @@
             justify-content: space-between;
             padding: 8px;
             align-items: center;
-        }
-
-        .vape-mock.cyan {
-            background: linear-gradient(180deg, var(--neon-cyan), var(--neon-purple));
-            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
-        }
-
-        .vape-mock.green {
-            background: linear-gradient(180deg, #00ff66, #006622);
-            box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
         }
 
         .vape-top {
@@ -466,24 +430,19 @@
             margin-bottom: 12px;
         }
 
-        .product-rating span {
-            color: var(--text-muted);
-            margin-left: 4px;
-        }
-
         .product-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .price-box .current-price {
+        .current-price {
             font-size: 16px;
             font-weight: bold;
             color: white;
         }
 
-        .price-box .old-price {
+        .old-price {
             font-size: 12px;
             color: var(--text-muted);
             text-decoration: line-through;
@@ -501,12 +460,6 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .add-cart-btn:hover {
-            background: var(--neon-cyan);
-            color: black;
         }
 
         /* Footer Info */
@@ -525,20 +478,7 @@
             margin-bottom: 8px;
         }
 
-        .footer-links {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-            margin: 15px 0;
-        }
-
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Carrito Modal (Sidebar Lateral) */
+        /* Carrito Modal */
         .cart-modal {
             position: fixed;
             top: 0;
@@ -576,18 +516,6 @@
             cursor: pointer;
         }
 
-        .cart-body {
-            flex: 1;
-            overflow-y: auto;
-            text-align: center;
-            color: var(--text-muted);
-        }
-
-        .cart-footer {
-            border-top: 1px solid var(--border-color);
-            padding-top: 15px;
-        }
-
         .overlay {
             position: fixed;
             top: 0;
@@ -608,12 +536,12 @@
 
     <!-- Banner Superior -->
     <div class="top-banner">
-        🔥 Envíos y Punto Fijo | 🔞 Solo mayores de edad
+        🔥 Servicio en Punto Fijo y Sucursal | 🔞 Solo mayores de edad
     </div>
 
     <!-- Header -->
     <header>
-        <div class="logo-container" onclick="switchView('inicio')">
+        <div class="logo-container">
             <div class="logo">☁️ NEOVAPE</div>
             <div class="logo-sub">Cyber Labs v2.0</div>
         </div>
@@ -625,75 +553,123 @@
         </div>
     </header>
 
-    <!-- Menú Desplegable Lateral (Drawer de Tres Rayas) -->
+    <!-- Menú Desplegable (Tres Rayas) -->
     <div class="drawer" id="main-drawer">
         <div class="drawer-header">
             <div class="logo">☁️ NEOVAPE</div>
             <button class="close-drawer" onclick="toggleDrawer()">✕</button>
         </div>
         <div class="nav-links">
-            <a class="nav-item" onclick="switchView('inicio')">🏠 Inicio</a>
-            <a class="nav-item" onclick="switchView('catalogo')">📦 Catálogo Completo</a>
-            <a class="nav-item" onclick="switchView('vapes')">💨 Vapes Desechables</a>
-            <a class="nav-item" onclick="switchView('pods')">🔋 Pod Systems</a>
-            <a class="nav-item vip" onclick="switchView('vip')">🔥 Secret VIP Discount (90% OFF)</a>
+            <a class="nav-item" onclick="toggleDrawer()">🏠 Inicio</a>
+            <a class="nav-item" onclick="toggleDrawer()">📦 Catálogo Completo</a>
+            <a class="nav-item" onclick="toggleDrawer()">📍 Ubicación / Punto Fijo</a>
+            <a class="nav-item" onclick="toggleDrawer()">📞 Contacto Directo</a>
         </div>
     </div>
 
-    <!-- VISTA 1: INICIO -->
-    <div id="view-inicio" class="view-section active">
-        <div class="container">
-            <!-- Buscador -->
-            <div class="search-box">
-                <span>🔍</span>
-                <input type="text" placeholder="Buscar en la tienda..." id="search-input" onkeyup="filterProducts()">
-            </div>
+    <!-- Contenido Principal -->
+    <div class="container">
 
-            <!-- Banner Promocional / Modalidad Punto Fijo y Redirección 1 -->
-            <div class="promo-box">
-                <span class="promo-tag">Modalidad Punto Fijo</span>
-                <div class="promo-title">Realiza tu pedido o apartado</div>
-                <div class="promo-desc">Aparta tu producto para recoger en sucursal o solicita atención directa.</div>
-                <!-- BOTÓN 1 DE REDIRECCIÓN (CAMBIA 'URL_DE_TU_PAGINA_DE_BROMA.html' POR TU LINK) -->
-                <a href="URL_DE_TU_PAGINA_DE_BROMA.html" target="_blank" class="btn-neon">📦 Realizar Pedido / Apartar</a>
-            </div>
+        <!-- Buscador -->
+        <div class="search-box">
+            <span>🔍</span>
+            <input type="text" placeholder="Buscar en la tienda..." id="search-input">
+        </div>
 
-            <!-- Categorías Destacadas -->
-            <div class="section-header">
-                <div class="section-title">Categorías Destacadas</div>
-                <a class="see-all" onclick="switchView('catalogo')">Ver todas →</a>
-            </div>
+        <!-- Banner de Ubicación / Punto Fijo con BOTÓN 1 DE REDIRECCIÓN -->
+        <div class="promo-box">
+            <span class="promo-tag">Punto Fijo & Apartados</span>
+            <div class="promo-title">Ubicación y Pedidos en Local</div>
+            <div class="promo-desc">Consulta disponibilidad en nuestro punto físico autorizado o aparta tu producto directamente.</div>
+            <!-- Botón 1 de Redirección hacia la broma -->
+            <a href="URL_DE_TU_PAGINA_DE_BROMA.html" target="_blank" class="btn-neon">📦 Realizar Pedido / Apartar</a>
+        </div>
 
-            <div class="categories-grid">
-                <div class="cat-card" onclick="switchView('vapes')">
-                    <div class="cat-icon">⚡</div>
-                    <div class="cat-name">Vapes Desechables</div>
-                    <div class="cat-desc">Hasta 30,000 Puffs con pantalla</div>
+        <!-- Categorías Destacadas -->
+        <div class="section-header">
+            <div class="section-title">Categorías Destacadas</div>
+        </div>
+
+        <div class="categories-grid">
+            <div class="cat-card">
+                <div class="cat-icon">⚡</div>
+                <div class="cat-name">Vapes Desechables</div>
+                <div class="cat-desc">Hasta 30,000 Puffs con pantalla</div>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon">🔋</div>
+                <div class="cat-name">Sistemas Pod</div>
+                <div class="cat-desc">Recargables y compactos</div>
+            </div>
+        </div>
+
+        <!-- Productos Destacados -->
+        <div class="section-header">
+            <div class="section-title">Lo más vendido de la semana</div>
+        </div>
+
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-badge">Más Vendido</div>
+                <div class="product-age">18+ ONLY</div>
+                <div class="product-img-box">
+                    <div class="vape-mock">
+                        <div class="vape-top"></div>
+                        <div class="vape-label">VAPES</div>
+                        <div class="vape-screen">NEO 2026</div>
+                    </div>
                 </div>
-                <div class="cat-card" onclick="switchView('pods')">
-                    <div class="cat-icon">🔋</div>
-                    <div class="cat-name">Sistemas Pod</div>
-                    <div class="cat-desc">Recargables y compactos</div>
-                </div>
-                <div class="cat-card" onclick="switchView('catalogo')">
-                    <div class="cat-icon">🧪</div>
-                    <div class="cat-name">E-Liquids Premium</div>
-                    <div class="cat-desc">Sales de Nicotina y Base Free</div>
-                </div>
-                <div class="cat-card" style="border-color: var(--neon-pink);" onclick="switchView('vip')">
-                    <div class="cat-icon">👑</div>
-                    <div class="cat-name" style="color: var(--neon-pink);">Ediciones Limitadas</div>
-                    <div class="cat-desc">Sabores secretos VIP 🔑</div>
+                <div class="product-category">Vapes</div>
+                <div class="product-name">CyberVapor 25K Ultra</div>
+                <div class="product-rating">★★★★★ <span>(4.9)</span></div>
+                <div class="product-footer">
+                    <div class="price-box">
+                        <span class="current-price">$24.99</span>
+                        <span class="old-price">$34.99</span>
+                    </div>
+                    <button class="add-cart-btn" onclick="addToCart()">🛒</button>
                 </div>
             </div>
+        </div>
 
-            <!-- Catálogo Destacado -->
-            <div class="section-header">
-                <div class="section-title">Lo más vendido de la semana</div>
+        <!-- Footer / Número Principal con BOTÓN 2 DE REDIRECCIÓN -->
+        <div class="site-footer">
+            <div class="footer-logo">☁️ NEOVAPE</div>
+            <p>Tienda conceptual de vaporizadores modernos en punto fijo autorizado.</p>
+            
+            <div style="margin: 20px 0; background: var(--card-bg); border: 1px solid var(--border-color); padding: 15px; border-radius: 12px; text-align: center;">
+                <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 5px;">📞 Número Principal / Local:</div>
+                <!-- Botón 2 de Redirección hacia la broma -->
+                <a href="URL_DE_TU_PAGINA_DE_BROMA.html" target="_blank" style="color: var(--neon-cyan); font-size: 18px; font-weight: bold; text-decoration: underline;">
+                    +52 55 0000 0000 (Click aquí)
+                </a>
             </div>
 
-            <div class="products-grid" id="products-container">
-                <!-- Producto 1 -->
-                <div class="product-card" data-name="cybervapor 25k ultra">
-                    <div class="product-badge">Más Vendido</div>
-   
+            <p style="font-size: 10px;">Venta exclusiva a mayores de edad. Muestra con fines puramente interactivos.</p>
+        </div>
+
+    </div>
+
+    <!-- Carrito Lateral con el Aviso Solicitado -->
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-header">
+            <h3>Tu Carrito Neón</h3>
+            <button class="close-btn" onclick="toggleCart()">✕</button>
+        </div>
+        <div class="cart-body" style="padding: 20px 0; text-align: center;">
+            <p style="color: var(--neon-pink); font-weight: bold; font-size: 13px; line-height: 1.5; margin-bottom: 15px;">
+                ⚠️ Pedidos en línea fuera de servicio por el momento por saturación del sistema.
+            </p>
+            <p style="font-size: 12px; color: var(--text-muted);">
+                Utiliza nuestra modalidad de punto fijo o aparta tu producto directamente en sucursal.
+            </p>
+        </div>
+        <div class="cart-footer">
+            <button class="btn-neon" onclick="toggleCart()">Entendido</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleDrawer() {
+            document.getElementById('main-drawer').classList.toggle('open');
