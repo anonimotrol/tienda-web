@@ -77,7 +77,7 @@
     <!-- HEADER / NAVIGATION -->
     <header class="sticky top-0 z-40 glass-panel border-b border-bordercolor">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('catalog')">
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="setCategory('all')">
                 <div class="w-10 h-10 rounded-xl gradient-btn flex items-center justify-center shadow-lg shadow-accentblue/20">
                     <i class="fa-solid fa-cloud text-darkbg text-xl font-bold"></i>
                 </div>
@@ -88,11 +88,11 @@
             </div>
 
             <!-- Desktop Nav -->
-            <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold tracking-wide">
-                <button onclick="switchTab('catalog')" id="tab-btn-catalog" class="text-accentblue transition-colors flex items-center space-x-2">
+            <nav class="hidden md:flex items-center space-x-6 text-sm font-semibold tracking-wide">
+                <button onclick="setCategory('all')" class="text-accentblue transition-colors flex items-center space-x-2">
                     <i class="fa-solid fa-store"></i><span>Inicio</span>
                 </button>
-                <button onclick="switchTab('catalog'); document.getElementById('catalog-search').scrollIntoView({behavior: 'smooth'})" class="text-gray-400 hover:text-accentblue transition-colors flex items-center space-x-2">
+                <button onclick="document.getElementById('catalog-search').scrollIntoView({behavior: 'smooth'})" class="text-gray-400 hover:text-accentblue transition-colors flex items-center space-x-2">
                     <i class="fa-solid fa-box-open"></i><span>Catálogo Completo</span>
                 </button>
                 <button onclick="setCategory('vape')" class="text-gray-400 hover:text-accentblue transition-colors flex items-center space-x-2">
@@ -119,11 +119,11 @@
         
         <!-- Mobile Navigation Menu -->
         <div id="mobile-menu" class="hidden md:hidden glass-panel border-b border-bordercolor px-4 py-4 space-y-3 text-sm font-semibold">
-            <button onclick="switchTab('catalog'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-accentblue"><i class="fa-solid fa-store mr-2"></i> Inicio</button>
-            <button onclick="switchTab('catalog'); toggleMobileMenu(); document.getElementById('catalog-search').scrollIntoView({behavior: 'smooth'})" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-gray-300"><i class="fa-solid fa-box-open mr-2"></i> Catálogo Completo</button>
+            <button onclick="setCategory('all'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-accentblue"><i class="fa-solid fa-store mr-2"></i> Inicio</button>
+            <button onclick="document.getElementById('catalog-search').scrollIntoView({behavior: 'smooth'}); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-gray-300"><i class="fa-solid fa-box-open mr-2"></i> Catálogo Completo</button>
             <button onclick="setCategory('vape'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-gray-300"><i class="fa-solid fa-bolt mr-2"></i> Vapes Desechables</button>
             <button onclick="setCategory('pod'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-gray-300"><i class="fa-solid fa-compact-disc mr-2"></i> Pod Systems</button>
-            <button onclick="openVipModal(); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400"><i class="fa-solid fa-crown mr-2"></i> Secret VIP Discount (90% OFF)</button>
+            <button onclick="openVipModal(); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400"><i class="fa-solid fa-crown mr-2"></i> Secret VIP Discount</button>
         </div>
     </header>
 
@@ -185,7 +185,7 @@
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <h3 class="font-display font-bold text-xl text-white">Productos Destacados (Vapes y Pods)</h3>
                 <div class="flex gap-2">
-                    <button onclick="setCategory('all')" id="btn-cat-all" class="px-3 py-1.5 rounded-lg bg-surface border border-accentblue text-accentblue text-xs font-bold">Todos</button>
+                    <button onclick="setCategory('all')" id="btn-cat-all" class="px-3 py-1.5 rounded-lg bg-accentblue/20 border border-accentblue text-accentblue text-xs font-bold">Todos</button>
                     <button onclick="setCategory('vape')" id="btn-cat-vape" class="px-3 py-1.5 rounded-lg bg-surface border border-bordercolor text-gray-400 text-xs font-bold">Vapes</button>
                     <button onclick="setCategory('pod')" id="btn-cat-pod" class="px-3 py-1.5 rounded-lg bg-surface border border-bordercolor text-gray-400 text-xs font-bold">Pods</button>
                 </div>
@@ -297,4 +297,6 @@
             <h3 class="font-display font-bold text-xl text-white">🔑 Cofre VIP Secreto</h3>
             <p class="text-gray-400 text-xs">Ingresa tu código VIP para desbloquear descuentos especiales.</p>
             <input type="text" id="vip-code" placeholder="Ingresa código..." class="w-full bg-surface border border-bordercolor rounded-xl px-4 py-3 text-sm text-center text-white uppercase">
-            <button onclick="checkVip()" class="w-full py-3 rounded-xl bg-amber-500 text-d
+            <button onclick="checkVip()" class="w-full py-3 rounded-xl bg-amber-500 text-darkbg font-bold text-xs uppercase">Desbloquear</button>
+        </div>
+   
