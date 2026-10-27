@@ -57,7 +57,7 @@
         .logo-container {
             display: flex;
             flex-direction: column;
-            cursor: pointer;
+            text-decoration: none;
         }
 
         .logo {
@@ -67,9 +67,6 @@
             background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .logo-sub {
@@ -85,13 +82,13 @@
             align-items: center;
         }
 
-        .cart-btn, .menu-icon {
+        .cart-btn {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             padding: 8px 12px;
             border-radius: 12px;
             color: white;
-            cursor: pointer;
+            text-decoration: none;
             position: relative;
             display: flex;
             align-items: center;
@@ -139,80 +136,12 @@
             outline: none;
         }
 
-        .search-box input:focus {
-            border-color: var(--neon-cyan);
-        }
-
         .search-box span {
             position: absolute;
             left: 14px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-muted);
-        }
-
-        /* Menú Lateral (Drawer de Tres Rayas) */
-        .drawer {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 80%;
-            max-width: 300px;
-            height: 100%;
-            background: var(--bg-color);
-            border-right: 1px solid var(--border-color);
-            z-index: 1001;
-            transition: 0.3s ease-in-out;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .drawer.open {
-            left: 0;
-        }
-
-        .drawer-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        .close-drawer {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .nav-links {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .nav-item {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 12px 16px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .nav-item:hover {
-            border-color: var(--neon-cyan);
         }
 
         /* Banner Promocional / Punto Fijo */
@@ -222,8 +151,6 @@
             border-radius: 16px;
             padding: 20px;
             margin-bottom: 25px;
-            position: relative;
-            overflow: hidden;
             box-shadow: 0 0 20px rgba(255, 0, 127, 0.15);
         }
 
@@ -296,12 +223,9 @@
             padding: 15px;
             border-radius: 14px;
             text-align: left;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .cat-card:hover {
-            border-color: var(--neon-cyan);
+            text-decoration: none;
+            color: white;
+            display: block;
         }
 
         .cat-icon {
@@ -368,7 +292,6 @@
             align-items: center;
             justify-content: center;
             margin: 25px 0 15px 0;
-            position: relative;
         }
 
         .vape-mock {
@@ -376,8 +299,6 @@
             height: 110px;
             background: linear-gradient(180deg, var(--neon-pink), var(--neon-purple));
             border-radius: 10px;
-            position: relative;
-            box-shadow: 0 0 15px rgba(157, 0, 255, 0.4);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -396,7 +317,6 @@
             font-size: 8px;
             font-weight: bold;
             color: white;
-            text-align: center;
             letter-spacing: 1px;
         }
 
@@ -459,7 +379,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
         }
 
         /* Footer Info */
@@ -477,59 +398,6 @@
             color: white;
             margin-bottom: 8px;
         }
-
-        /* Carrito Modal */
-        .cart-modal {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            max-width: 380px;
-            height: 100%;
-            background: var(--bg-color);
-            border-left: 1px solid var(--border-color);
-            z-index: 1002;
-            transition: 0.3s ease-in-out;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .cart-modal.open {
-            right: 0;
-        }
-
-        .cart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 15px;
-            margin-bottom: 15px;
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
-            display: none;
-        }
-
-        .overlay.show {
-            display: block;
-        }
     </style>
 </head>
 <body>
@@ -541,47 +409,33 @@
 
     <!-- Header -->
     <header>
-        <div class="logo-container">
+        <a href="index.html" class="logo-container">
             <div class="logo">☁️ NEOVAPE</div>
             <div class="logo-sub">Cyber Labs v2.0</div>
-        </div>
+        </a>
         <div class="header-actions">
-            <button class="cart-btn" onclick="toggleCart()">
-                🛒 <span class="cart-badge" id="cart-count">0</span>
-            </button>
-            <div class="menu-icon" onclick="toggleDrawer()">☰</div>
+            <!-- Al dar clic al carrito, redirige a una sección de aviso o abre enlace directo -->
+            <a href="URL_DE_TU_PAGINA_DE_BROMA.html" target="_blank" class="cart-btn">
+                🛒 <span class="cart-badge">!</span>
+            </a>
         </div>
     </header>
-
-    <!-- Menú Desplegable (Tres Rayas) -->
-    <div class="drawer" id="main-drawer">
-        <div class="drawer-header">
-            <div class="logo">☁️ NEOVAPE</div>
-            <button class="close-drawer" onclick="toggleDrawer()">✕</button>
-        </div>
-        <div class="nav-links">
-            <a class="nav-item" onclick="toggleDrawer()">🏠 Inicio</a>
-            <a class="nav-item" onclick="toggleDrawer()">📦 Catálogo Completo</a>
-            <a class="nav-item" onclick="toggleDrawer()">📍 Ubicación / Punto Fijo</a>
-            <a class="nav-item" onclick="toggleDrawer()">📞 Contacto Directo</a>
-        </div>
-    </div>
 
     <!-- Contenido Principal -->
     <div class="container">
 
-        <!-- Buscador -->
+        <!-- Buscador Estático (Visual limpio) -->
         <div class="search-box">
             <span>🔍</span>
-            <input type="text" placeholder="Buscar en la tienda..." id="search-input">
+            <input type="text" placeholder="Buscar en la tienda...">
         </div>
 
-        <!-- Banner de Ubicación / Punto Fijo con BOTÓN 1 DE REDIRECCIÓN -->
+        <!-- Banner de Ubicación / Punto Fijo con BOTÓN 1 DE REDIRECCIÓN A LA BROMA -->
         <div class="promo-box">
             <span class="promo-tag">Punto Fijo & Apartados</span>
             <div class="promo-title">Ubicación y Pedidos en Local</div>
             <div class="promo-desc">Consulta disponibilidad en nuestro punto físico autorizado o aparta tu producto directamente.</div>
-            <!-- Botón 1 de Redirección hacia la broma -->
+            <!-- BOTÓN 1 DE REDIRECCIÓN (Abre tu página de broma en otra pestaña) -->
             <a href="URL_DE_TU_PAGINA_DE_BROMA.html" target="_blank" class="btn-neon">📦 Realizar Pedido / Apartar</a>
         </div>
 
@@ -591,16 +445,16 @@
         </div>
 
         <div class="categories-grid">
-            <div class="cat-card">
+            <a href="URL_DE_TU_PAGINA_DE_BROMA.html" target="_blank" class="cat-card">
                 <div class="cat-icon">⚡</div>
                 <div class="cat-name">Vapes Desechables</div>
-                <div class="cat-desc">Hasta 30,000 Puffs con pantalla</div>
-            </div>
-            <div class="cat-card">
+                <div class="cat-desc">Hasta 30,000 Puffs</div>
+            </a>
+            <a href="URL_DE_TU_PAGINA_DE_BROMA.html" target="_blank" class="cat-card">
                 <div class="cat-icon">🔋</div>
                 <div class="cat-name">Sistemas Pod</div>
                 <div class="cat-desc">Recargables y compactos</div>
-            </div>
+            </a>
         </div>
 
         <!-- Productos Destacados -->
@@ -627,19 +481,20 @@
                         <span class="current-price">$24.99</span>
                         <span class="old-price">$34.99</span>
                     </div>
-                    <button class="add-cart-btn" onclick="addToCart()">🛒</button>
+                    <!-- Botón de carrito del producto redirige directo a la broma -->
+                    <a href="URL_DE_TU_PAGINA_DE_BROMA.html" target="_blank" class="add-cart-btn">🛒</a>
                 </div>
             </div>
         </div>
 
-        <!-- Footer / Número Principal con BOTÓN 2 DE REDIRECCIÓN -->
+        <!-- Footer / Número Principal con BOTÓN 2 DE REDIRECCIÓN A LA BROMA -->
         <div class="site-footer">
             <div class="footer-logo">☁️ NEOVAPE</div>
             <p>Tienda conceptual de vaporizadores modernos en punto fijo autorizado.</p>
             
             <div style="margin: 20px 0; background: var(--card-bg); border: 1px solid var(--border-color); padding: 15px; border-radius: 12px; text-align: center;">
                 <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 5px;">📞 Número Principal / Local:</div>
-                <!-- Botón 2 de Redirección hacia la broma -->
+                <!-- BOTÓN 2 DE REDIRECCIÓN (Abre tu página de broma en otra pestaña) -->
                 <a href="URL_DE_TU_PAGINA_DE_BROMA.html" target="_blank" style="color: var(--neon-cyan); font-size: 18px; font-weight: bold; text-decoration: underline;">
                     +52 55 0000 0000 (Click aquí)
                 </a>
@@ -650,26 +505,5 @@
 
     </div>
 
-    <!-- Carrito Lateral con el Aviso Solicitado -->
-    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
-    <div class="cart-modal" id="cart-modal">
-        <div class="cart-header">
-            <h3>Tu Carrito Neón</h3>
-            <button class="close-btn" onclick="toggleCart()">✕</button>
-        </div>
-        <div class="cart-body" style="padding: 20px 0; text-align: center;">
-            <p style="color: var(--neon-pink); font-weight: bold; font-size: 13px; line-height: 1.5; margin-bottom: 15px;">
-                ⚠️ Pedidos en línea fuera de servicio por el momento por saturación del sistema.
-            </p>
-            <p style="font-size: 12px; color: var(--text-muted);">
-                Utiliza nuestra modalidad de punto fijo o aparta tu producto directamente en sucursal.
-            </p>
-        </div>
-        <div class="cart-footer">
-            <button class="btn-neon" onclick="toggleCart()">Entendido</button>
-        </div>
-    </div>
-
-    <script>
-        function toggleDrawer() {
-            document.getElementById('main-drawer').classList.toggle('open');
+</body>
+</html>
