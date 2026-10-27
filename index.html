@@ -3,29 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEOVAPE - Cyber Store</title>
+    <title>NEOVAPE CYBER LABS v2.0</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        cyber: ['Orbitron', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
                     },
                     colors: {
-                        cyberdark: '#0a0b10',
-                        cybersurface: '#12141c',
-                        cyberborder: '#1f2433',
-                        neoncyan: '#00f0ff',
-                        neonpink: '#ff007f',
-                        neonpurple: '#b000ff',
-                        neongreen: '#00ff66',
+                        darkbg: '#08090d',
+                        surface: '#111319',
+                        surfacecard: '#161922',
+                        bordercolor: '#222736',
+                        accentblue: '#00d2ff',
+                        accentpurple: '#9d00ff',
+                        accentpink: '#ff007a',
+                        accentgreen: '#00ff88',
                     }
                 }
             }
@@ -33,274 +34,278 @@
     </script>
     <style>
         body {
-            background-color: #0a0b10;
+            background-color: #08090d;
             color: #f3f4f6;
             overflow-x: hidden;
         }
-        .cyber-glow {
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.25);
+        .glow-effect {
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.15);
         }
-        .cyber-border {
-            border: 1px solid rgba(0, 240, 255, 0.3);
+        .gradient-text {
+            background: linear-gradient(135deg, #00d2ff 0%, #9d00ff 50%, #ff007a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .cyber-gradient {
-            background: linear-gradient(135deg, #00f0ff 0%, #b000ff 50%, #ff007f 100%);
+        .gradient-btn {
+            background: linear-gradient(135deg, #00d2ff 0%, #9d00ff 100%);
         }
         .glass-panel {
-            background: rgba(18, 20, 28, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(17, 19, 25, 0.85);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
         }
         ::-webkit-scrollbar {
             width: 8px;
         }
         ::-webkit-scrollbar-track {
-            background: #0a0b10;
+            background: #08090d;
         }
         ::-webkit-scrollbar-thumb {
-            background: #1f2433;
+            background: #222736;
             border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #00f0ff;
         }
     </style>
 </head>
 <body class="min-h-screen flex flex-col font-sans">
 
-    <!-- Header / Navbar -->
-    <header class="sticky top-0 z-40 glass-panel border-b border-cyberborder">
+    <!-- ANNOUNCEMENT BAR -->
+    <div class="bg-gradient-to-r from-accentpurple via-accentpink to-accentblue text-white text-xs py-2 px-4 text-center font-bold tracking-widest uppercase shadow-lg">
+        🔥 ENVÍOS GRATIS EN COMPRAS MAYORES A $500 | 🔞 SOLO MAYORES DE EDAD <br>[🎁 CLICK AQUÍ PARA TU CÓDIGO DEL 90% DESCUENTO]
+    </div>
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-bordercolor">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchView('catalog')">
-                <div class="w-10 h-10 rounded-xl cyber-gradient flex items-center justify-center cyber-glow">
-                    <i class="fa-solid fa-cloud text-cyberdark text-xl font-bold"></i>
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('catalog')">
+                <div class="w-10 h-10 rounded-xl gradient-btn flex items-center justify-center shadow-lg shadow-accentblue/20">
+                    <i class="fa-solid fa-cloud text-darkbg text-xl font-bold"></i>
                 </div>
                 <div>
-                    <span class="font-cyber font-black text-2xl tracking-wider bg-gradient-to-r from-neoncyan via-neonpurple to-neonpink bg-clip-text text-transparent">NEOVAPE</span>
-                    <span class="block text-[10px] tracking-widest text-gray-400 font-cyber">CYBER EDITION v3.0</span>
+                    <span class="font-display font-black text-2xl tracking-wider gradient-text">NEOVAPE</span>
+                    <span class="block text-[10px] tracking-widest text-gray-400 font-bold uppercase">CYBER LABS v2.0</span>
                 </div>
             </div>
 
-            <nav class="hidden md:flex items-center space-x-8 font-cyber text-sm tracking-wide">
-                <button onclick="switchView('catalog')" id="nav-catalog" class="text-neoncyan transition-colors hover:text-neoncyan flex items-center space-x-2">
-                    <i class="fa-solid fa-store"></i><span>CATÁLOGO</span>
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold tracking-wide">
+                <button onclick="switchTab('catalog')" id="tab-btn-catalog" class="text-accentblue transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-store"></i><span>Catálogo</span>
                 </button>
-                <button onclick="switchView('pickup')" id="nav-pickup" class="text-gray-400 hover:text-neoncyan transition-colors flex items-center space-x-2">
-                    <i class="fa-solid fa-location-dot"></i><span>PUNTOS FÍSICOS</span>
+                <button onclick="switchTab('categories')" id="tab-btn-categories" class="text-gray-400 hover:text-accentblue transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-layer-group"></i><span>Categorías</span>
                 </button>
-                <button onclick="switchView('status')" id="nav-status" class="text-gray-400 hover:text-neoncyan transition-colors flex items-center space-x-2">
-                    <i class="fa-solid fa-shield-halved"></i><span>ESTADO</span>
+                <button onclick="openVipModal()" class="text-amber-400 hover:text-amber-300 transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-crown"></i><span>VIP Club</span>
                 </button>
             </nav>
 
             <div class="flex items-center space-x-4">
-                <button onclick="toggleCart()" class="relative p-2.5 rounded-xl bg-cybersurface border border-cyberborder hover:border-neoncyan transition-all text-gray-300 hover:text-neoncyan">
-                    <i class="fa-solid fa-cart-shopping text-lg"></i>
-                    <span id="cart-badge" class="absolute -top-1 -right-1 w-5 h-5 bg-neonpink text-cyberdark text-xs font-bold rounded-full flex items-center justify-center hidden">0</span>
+                <button onclick="toggleCart()" class="relative p-3 rounded-xl bg-surface border border-bordercolor hover:border-accentblue transition-all text-gray-300 hover:text-accentblue">
+                    <i class="fa-solid fa-bag-shopping text-lg"></i>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 w-5 h-5 bg-accentpink text-darkbg text-xs font-bold rounded-full flex items-center justify-center hidden">0</span>
                 </button>
-                <button onclick="toggleMobileMenu()" class="md:hidden p-2.5 rounded-xl bg-cybersurface border border-cyberborder text-gray-300 hover:text-neoncyan">
+                <button onclick="toggleMobileMenu()" class="md:hidden p-3 rounded-xl bg-surface border border-bordercolor text-gray-300 hover:text-accentblue">
                     <i class="fa-solid fa-bars text-lg"></i>
                 </button>
             </div>
         </div>
-        
-        <div id="mobile-menu" class="hidden md:hidden glass-panel border-b border-cyberborder px-4 py-4 space-y-3 font-cyber text-sm">
-            <button onclick="switchView('catalog'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-cybersurface text-neoncyan"><i class="fa-solid fa-store mr-2"></i> CATÁLOGO</button>
-            <button onclick="switchView('pickup'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-cybersurface text-gray-300"><i class="fa-solid fa-location-dot mr-2"></i> PUNTOS FÍSICOS</button>
-            <button onclick="switchView('status'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-cybersurface text-gray-300"><i class="fa-solid fa-shield-halved mr-2"></i> ESTADO</button>
+
+        <div id="mobile-menu" class="hidden md:hidden glass-panel border-b border-bordercolor px-4 py-4 space-y-3 text-sm font-semibold">
+            <button onclick="switchTab('catalog'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-accentblue">Catálogo</button>
+            <button onclick="switchTab('categories'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-gray-300">Categorías</button>
+            <button onclick="openVipModal(); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-amber-400">VIP Club</button>
         </div>
     </header>
 
-    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full space-y-10">
 
-        <!-- Vista: CATÁLOGO -->
-        <div id="view-catalog" class="space-y-10">
-            <div class="relative rounded-3xl overflow-hidden p-8 sm:p-12 glass-panel border border-cyberborder cyber-glow">
-                <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-neonpurple/10 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute -left-20 -top-20 w-96 h-96 bg-neoncyan/10 rounded-full blur-3xl pointer-events-none"></div>
-                
+        <!-- VISTA CATÁLOGO -->
+        <div id="tab-catalog" class="space-y-10">
+            <!-- Hero Banner -->
+            <div class="relative rounded-3xl overflow-hidden p-8 sm:p-12 glass-panel border border-bordercolor glow-effect">
                 <div class="relative z-10 max-w-2xl space-y-6">
-                    <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-neoncyan/10 border border-neoncyan/30 text-neoncyan text-xs font-cyber tracking-wider">
-                        <span class="w-2 h-2 rounded-full bg-neoncyan animate-pulse"></span>
-                        <span>SISTEMA EN LÍNEA ACTIVO</span>
-                    </div>
-                    <h1 class="font-cyber font-black text-3xl sm:text-5xl tracking-tight uppercase leading-none">
-                        Tecnología de vapeo <span class="bg-gradient-to-r from-neoncyan to-neonpink bg-clip-text text-transparent">Next-Gen</span>
+                    <span class="px-3 py-1 rounded-full bg-accentblue/10 border border-accentblue/30 text-accentblue text-xs font-bold uppercase">NUEVA COLECCIÓN CYBER 2026</span>
+                    <h1 class="font-display font-black text-3xl sm:text-5xl tracking-tight leading-tight">
+                        SABORES DEL <span class="gradient-text">FUTURO HOY.</span>
                     </h1>
                     <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
-                        Explora dispositivos de alta gama, pods y líquidos con entrega personal inmediata en tu zona. Calidad y potencia garantizada.
+                        Descubre la tecnología de vaporización más avanzada. Vapes desechables, Pods de recarga y E-liquids exóticos con entrega rápida ultrasónica.
                     </p>
-                    <div class="flex flex-wrap gap-4 pt-2">
-                        <button onclick="document.getElementById('productos-section').scrollIntoView({behavior: 'smooth'})" class="px-6 py-3.5 rounded-xl cyber-gradient text-cyberdark font-cyber font-bold tracking-wider hover:opacity-90 transition-all shadow-lg shadow-neoncyan/20 flex items-center space-x-2">
-                            <span>Explorar Catálogo</span>
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </button>
-                        <button onclick="switchView('pickup')" class="px-6 py-3.5 rounded-xl bg-cybersurface border border-neongreen/40 text-neongreen font-cyber font-bold tracking-wider hover:bg-neongreen/10 transition-all flex items-center space-x-2">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <span>Puntos de Entrega Física</span>
-                        </button>
+                    <button onclick="document.getElementById('catalog-search').scrollIntoView({behavior: 'smooth'})" class="px-6 py-3.5 rounded-xl gradient-btn text-darkbg font-bold tracking-wider shadow-lg">
+                        Explorar Catálogo →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mystery Box Promo Card -->
+            <div onclick="addPromoToCart('Mystery Box Cyber', 19.99)" class="glass-panel rounded-3xl p-6 border border-bordercolor cursor-pointer hover:border-accentpink transition-all space-y-4">
+                <div class="inline-block bg-accentpink/20 text-accentpink text-xs font-black px-3 py-1 rounded-full uppercase">🔥 Mistery Box ($1 USD)</div>
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div class="space-y-1">
+                        <h3 class="font-display font-bold text-xl text-white">Cyber Vapor 25K</h3>
+                        <p class="text-gray-400 text-xs">Sabores Neón Intensos con Smart LCD</p>
+                    </div>
+                    <span class="font-display font-black text-2xl text-accentpink">$19.99 MXN</span>
+                </div>
+            </div>
+
+            <!-- Categorías Destacadas Grid -->
+            <div class="space-y-4 pt-4">
+                <div class="flex justify-between items-center">
+                    <h2 class="font-display font-bold text-2xl text-white">Categorías Destacadas</h2>
+                    <span onclick="switchTab('categories')" class="text-accentblue text-xs font-bold cursor-pointer hover:underline">Ver todas →</span>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div onclick="setCategory('vape')" class="glass-panel p-6 rounded-2xl border border-bordercolor hover:border-accentblue transition-all cursor-pointer space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-accentblue/10 text-accentblue flex items-center justify-center text-lg"><i class="fa-solid fa-cloud"></i></div>
+                        <h3 class="font-bold text-white text-base">Vapes Desechables</h3>
+                        <p class="text-gray-400 text-xs">Hasta 30,000 Puffs con pantalla</p>
+                    </div>
+                    <div onclick="setCategory('pod')" class="glass-panel p-6 rounded-2xl border border-bordercolor hover:border-accentpurple transition-all cursor-pointer space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-accentpurple/10 text-accentpurple flex items-center justify-center text-lg"><i class="fa-solid fa-compact-disc"></i></div>
+                        <h3 class="font-bold text-white text-base">Sistemas Pod</h3>
+                        <p class="text-gray-400 text-xs">Recargables y compactos</p>
+                    </div>
+                    <div onclick="setCategory('liquid')" class="glass-panel p-6 rounded-2xl border border-bordercolor hover:border-accentpink transition-all cursor-pointer space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-accentpink/10 text-accentpink flex items-center justify-center text-lg"><i class="fa-solid fa-vial"></i></div>
+                        <h3 class="font-bold text-white text-base">E-Liquids Premium</h3>
+                        <p class="text-gray-400 text-xs">Sales de Nicotina y Base Free</p>
+                    </div>
+                    <div onclick="openVipModal()" class="glass-panel p-6 rounded-2xl border border-amber-500/40 hover:border-amber-400 transition-all cursor-pointer space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg"><i class="fa-solid fa-crown"></i></div>
+                        <h3 class="font-bold text-white text-base">Ediciones Limitadas</h3>
+                        <p class="text-gray-400 text-xs">Sabores secretos VIP 🔑</p>
                     </div>
                 </div>
             </div>
 
-            <div id="productos-section" class="flex flex-col md:flex-row justify-between items-center gap-4 pt-4">
-                <div class="w-full md:w-96 relative">
+            <!-- Buscador y Grid de Productos -->
+            <div id="catalog-search" class="space-y-6 pt-4">
+                <div class="w-full relative">
                     <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                    <input type="text" id="search-input" oninput="filterProducts()" placeholder="Buscar equipo o líquido..." class="w-full bg-cybersurface border border-cyberborder rounded-xl pl-12 pr-4 py-3 text-sm focus:outline-none focus:border-neoncyan transition-all text-white placeholder-gray-500">
+                    <input type="text" id="search-input" oninput="filterProducts()" placeholder="Buscar dispositivo o sabor..." class="w-full bg-surface border border-bordercolor rounded-xl pl-12 pr-4 py-3 text-sm focus:outline-none focus:border-accentblue text-white placeholder-gray-500">
                 </div>
-                <div class="flex flex-wrap gap-2 w-full md:w-auto">
-                    <button onclick="setCategory('all')" id="cat-all" class="px-4 py-2 rounded-xl text-xs font-cyber tracking-wider cyber-gradient text-cyberdark font-bold transition-all">TODOS</button>
-                    <button onclick="setCategory('vape')" id="cat-vape" class="px-4 py-2 rounded-xl text-xs font-cyber tracking-wider bg-cybersurface border border-cyberborder text-gray-300 hover:border-neoncyan transition-all">VAPES</button>
-                    <button onclick="setCategory('liquid')" id="cat-liquid" class="px-4 py-2 rounded-xl text-xs font-cyber tracking-wider bg-cybersurface border border-cyberborder text-gray-300 hover:border-neoncyan transition-all">LÍQUIDOS</button>
-                </div>
-            </div>
-
-            <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-        </div>
-
-        <!-- Vista: PUNTOS FÍSICOS (Redirección) -->
-        <div id="view-pickup" class="hidden space-y-8 max-w-4xl mx-auto">
-            <div class="text-center space-y-4">
-                <div class="inline-block p-3 rounded-2xl bg-neongreen/10 border border-neongreen/30 text-neongreen mb-2">
-                    <i class="fa-solid fa-map-location-dot text-3xl"></i>
-                </div>
-                <h2 class="font-cyber font-black text-3xl sm:text-4xl">Puntos de Entrega Física</h2>
-                <p class="text-gray-400 max-w-lg mx-auto text-sm">
-                    Selecciona tu zona habitual para agendar entrega personal inmediata en puntos seguros. Al elegir cualquier punto serás redirigido al sistema de coordinación.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
-                <div onclick="triggerRedirect()" class="glass-panel p-6 rounded-2xl border border-cyberborder hover:border-neongreen transition-all cursor-pointer group space-y-4">
-                    <div class="flex justify-between items-start">
-                        <span class="px-3 py-1 rounded-full bg-neongreen/10 text-neongreen text-xs font-cyber">DISPONIBLE HOY</span>
-                        <i class="fa-solid fa-arrow-up-right-from-square text-gray-500 group-hover:text-neongreen transition-colors"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-cyber font-bold text-lg text-white group-hover:text-neongreen transition-colors">Zona Norte / Plaza Principal</h3>
-                        <p class="text-gray-400 text-sm mt-1">Punto medio seguro vigilado. Entrega rápida en menos de 30 mins.</p>
-                    </div>
-                </div>
-
-                <div onclick="triggerRedirect()" class="glass-panel p-6 rounded-2xl border border-cyberborder hover:border-neongreen transition-all cursor-pointer group space-y-4">
-                    <div class="flex justify-between items-start">
-                        <span class="px-3 py-1 rounded-full bg-neongreen/10 text-neongreen text-xs font-cyber">DISPONIBLE HOY</span>
-                        <i class="fa-solid fa-arrow-up-right-from-square text-gray-500 group-hover:text-neongreen transition-colors"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-cyber font-bold text-lg text-white group-hover:text-neongreen transition-colors">Estación Metro / Conexión Sur</h3>
-                        <p class="text-gray-400 text-sm mt-1">Tornos de acceso o torniquetes principales. Acordar por chat.</p>
-                    </div>
-                </div>
+                <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
             </div>
         </div>
 
-        <!-- Vista: ESTADO -->
-        <div id="view-status" class="hidden space-y-8 max-w-3xl mx-auto">
-            <div class="text-center space-y-4">
-                <h2 class="font-cyber font-black text-3xl sm:text-4xl">Estado Operativo</h2>
-            </div>
-            <div class="glass-panel rounded-2xl p-6 border border-cyberborder space-y-6">
-                <div class="flex items-center justify-between py-3 border-b border-cyberborder">
-                    <span class="font-cyber text-sm font-semibold">Red de Entregas Físicas</span>
-                    <span class="px-3 py-1 rounded-full bg-neongreen/10 text-neongreen text-xs font-cyber">OPERATIVO 100%</span>
+        <!-- VISTA CATEGORÍAS -->
+        <div id="tab-categories" class="hidden space-y-8">
+            <h2 class="font-display font-black text-3xl text-white">Todas las Categorías</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <div onclick="switchTab('catalog'); setCategory('vape');" class="glass-panel p-6 rounded-2xl border border-bordercolor cursor-pointer space-y-2">
+                    <h3 class="font-bold text-white text-lg">Vapes 10K - 30K Puffs</h3>
+                    <p class="text-gray-400 text-sm">Dispositivos de alta duración con pantallas inteligentes.</p>
                 </div>
-                <div class="flex items-center justify-between py-3">
-                    <span class="font-cyber text-sm font-semibold">Envíos en Línea</span>
-                    <span class="px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-cyber">FUERA DE SERVICIO</span>
+                <div onclick="switchTab('catalog'); setCategory('pod');" class="glass-panel p-6 rounded-2xl border border-bordercolor cursor-pointer space-y-2">
+                    <h3 class="font-bold text-white text-lg">Kits de Inicio Pods</h3>
+                    <p class="text-gray-400 text-sm">Equipos recargables para uso diario.</p>
+                </div>
+                <div onclick="switchTab('catalog'); setCategory('liquid');" class="glass-panel p-6 rounded-2xl border border-bordercolor cursor-pointer space-y-2">
+                    <h3 class="font-bold text-white text-lg">Sales de Nicotina</h3>
+                    <p class="text-gray-400 text-sm">E-liquids concentrados de 30ml o 50ml.</p>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Modal de Detalles -->
-    <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
-        <div class="glass-panel max-w-lg w-full rounded-3xl border border-cyberborder p-6 sm:p-8 relative space-y-6">
-            <button onclick="closeModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-            <div id="modal-content" class="space-y-4"></div>
+    <!-- FOOTER -->
+    <footer class="glass-panel border-t border-bordercolor mt-auto py-8 px-4 text-xs text-gray-400 space-y-4">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+                <span class="font-display font-black text-lg text-white">NEOVAPE</span>
+                <p class="mt-1">Tienda conceptual de vaporizadores modernos y sabores premium con temática futurista.</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-2 uppercase text-[11px] tracking-wider">Soporte</h4>
+                <p>Preguntas Frecuentes</p>
+                <p>Rastreo de Envíos</p>
+                <p>Garantía Neón</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-white mb-2 uppercase text-[11px] tracking-wider">Aviso Legal</h4>
+                <p>Venta exclusiva a mayores de 18 años. El consumo de nicotina es adictivo. Muestra con fines puramente interactivos e ilustrativos.</p>
+            </div>
         </div>
-    </div>
+    </footer>
 
-    <!-- Carrito -->
+    <!-- CARRITO LATERAL -->
     <div id="cart-drawer" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden justify-end">
-        <div class="w-full max-w-md bg-cyberdark border-l border-cyberborder h-full flex flex-col p-6 space-y-6 shadow-2xl">
-            <div class="flex items-center justify-between pb-4 border-b border-cyberborder">
-                <h3 class="font-cyber font-bold text-lg">TU CARRITO</h3>
-                <button onclick="toggleCart()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+        <div class="w-full max-w-md bg-darkbg border-l border-bordercolor h-full flex flex-col p-6 space-y-6">
+            <div class="flex items-center justify-between pb-4 border-b border-bordercolor">
+                <h3 class="font-display font-bold text-lg text-white">Tu Carrito</h3>
+                <button onclick="toggleCart()" class="text-gray-400 hover:text-white p-2"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-
-            <div class="space-y-2 bg-cybersurface p-4 rounded-xl border border-cyberborder">
-                <label class="block font-cyber text-xs text-gray-400">MÉTODO DE ENTREGA</label>
-                <div class="grid grid-cols-2 gap-2">
-                    <button onclick="setDeliveryMode('online')" id="mode-online" class="py-2 px-2 rounded-lg border border-amber-500/40 bg-amber-500/10 text-amber-400 text-[10px] font-cyber font-bold">En Línea (Fuera)</button>
-                    <button onclick="setDeliveryMode('physical')" id="mode-physical" class="py-2 px-2 rounded-lg border border-cyberborder bg-cyberdark text-gray-300 text-[10px] font-cyber font-bold">Entrega Física</button>
-                </div>
-            </div>
-
-            <div id="cart-items" class="flex-grow overflow-y-auto space-y-4"></div>
-
-            <div class="border-t border-cyberborder pt-4 space-y-4">
-                <div class="flex justify-between items-center font-cyber text-lg">
+            <div id="cart-items" class="flex-grow overflow-y-auto space-y-3"></div>
+            <div class="border-t border-bordercolor pt-4 space-y-4">
+                <div class="flex justify-between items-center font-display text-lg">
                     <span class="text-gray-400">TOTAL:</span>
-                    <span id="cart-total" class="font-black text-neoncyan">$0.00 MXN</span>
+                    <span id="cart-total" class="font-black text-accentblue">$0.00 MXN</span>
                 </div>
-                <button onclick="checkout()" class="w-full py-4 rounded-xl cyber-gradient text-cyberdark font-cyber font-bold tracking-wider">PROCEDER AL PAGO</button>
+                <button onclick="checkout()" class="w-full py-4 rounded-xl gradient-btn text-darkbg font-bold tracking-wider text-sm uppercase">
+                    Proceder al Pago
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Toast -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 glass-panel border border-neoncyan px-6 py-3 rounded-xl font-cyber text-xs text-white transform translate-y-20 opacity-0 transition-all duration-300">
+    <!-- MODAL VIP -->
+    <div id="vip-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="glass-panel max-w-md w-full rounded-3xl border border-amber-500/50 p-6 space-y-4 text-center">
+            <button onclick="closeVipModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="font-display font-bold text-xl text-white">🔑 Cofre VIP Secreto</h3>
+            <input type="text" id="vip-code" placeholder="Ingresa código VIP..." class="w-full bg-surface border border-bordercolor rounded-xl px-4 py-3 text-sm text-center text-white uppercase">
+            <button onclick="checkVip()" class="w-full py-3 rounded-xl bg-amber-500 text-darkbg font-bold text-xs uppercase">Desbloquear</button>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 glass-panel border border-accentblue px-6 py-3 rounded-xl text-xs font-bold text-white transform translate-y-20 opacity-0 transition-all duration-300">
         <span id="toast-message">Notificación</span>
     </div>
 
     <script>
-        const REDIRECT_URL = 'https://anonimotrol.github.io/web/';
         const products = [
-            { id: 1, name: 'Elfbar BC5000 Ultra', category: 'vape', price: 350, rating: 4.9, puffs: '5000 Puffs', nicotine: '5%', desc: 'Dispositivo ultra compacto con tecnología de malla avanzada.', image: 'https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&q=80&w=600' },
-            { id: 2, name: 'Lost Mary BM6000', category: 'vape', price: 420, rating: 4.8, puffs: '6000 Puffs', nicotine: '5%', desc: 'Diseño ergonómico futurista con indicador LED.', image: 'https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=600' },
-            { id: 3, name: 'Nasty Juice Cush Man 60ml', category: 'liquid', price: 280, rating: 4.7, puffs: 'E-Liquid', nicotine: '3mg', desc: 'Exquisita mezcla de mango tropical dulce.', image: 'https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&q=80&w=600' }
+            { id: 1, name: 'CyberVapor 25K Ultra', category: 'vape', price: 499.00, originalPrice: 580, rating: 4.9, puffs: '25,000 Puffs', nicotine: '5%', desc: 'Pantalla LCD en tiempo real con indicador de batería.', image: 'https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=600', badge: 'MÁS VENDIDO' },
+            { id: 2, name: 'Neon Pod Pro X', category: 'pod', price: 450.00, originalPrice: 520, rating: 4.8, puffs: 'Kit Recargable', nicotine: 'Segun Pod', desc: 'Kit de inicio con batería de 1000mAh.', image: 'https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&q=80&w=600', badge: 'NUEVO' },
+            { id: 3, name: 'Alien Liquid Sales 30ml', category: 'liquid', price: 250.00, originalPrice: 300, rating: 5.0, puffs: 'E-Liquid 30ml', nicotine: '50mg Sales', desc: 'Sabor espacial a mora azul helada.', image: 'https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&q=80&w=600', badge: '50MG NIC' }
         ];
 
         let cart = [];
-        let currentCategory = 'all';
-        let currentDeliveryMode = 'physical';
 
-        function triggerRedirect() { window.location.href = REDIRECT_URL; }
-        function switchView(v) {
-            ['catalog', 'pickup', 'status'].forEach(id => document.getElementById(`view-${id}`).classList.add('hidden'));
-            document.getElementById(`view-${v}`).classList.remove('hidden');
+        function switchTab(tabId) {
+            ['catalog', 'categories'].forEach(id => {
+                const el = document.getElementById(`tab-${id}`);
+                if (el) el.classList.add('hidden');
+            });
+            const active = document.getElementById(`tab-${tabId}`);
+            if (active) active.classList.remove('hidden');
         }
-        function toggleMobileMenu() { document.getElementById('mobile-menu').classList.toggle('hidden'); }
+
         function renderProducts(items) {
             const grid = document.getElementById('products-grid');
             grid.innerHTML = '';
             items.forEach(p => {
                 grid.innerHTML += `
-                    <div class="glass-panel rounded-2xl overflow-hidden border border-cyberborder p-4 space-y-3">
-                        <img src="${p.image}" class="w-full h-40 object-cover rounded-xl cursor-pointer" onclick="openModal(${p.id})">
-                        <h3 class="font-cyber font-bold text-white cursor-pointer" onclick="openModal(${p.id})">${p.name}</h3>
-                        <div class="flex justify-between items-center">
-                            <span class="font-cyber font-bold text-neoncyan">$${p.price} MXN</span>
-                            <button onclick="addToCart(${p.id})" class="px-4 py-2 cyber-gradient text-cyberdark font-cyber text-xs rounded-xl">Agregar</button>
+                    <div class="glass-panel rounded-2xl overflow-hidden border border-bordercolor p-4 space-y-4">
+                        <div class="relative">
+                            <span class="absolute top-2 left-2 bg-amber-400 text-darkbg text-[10px] font-black px-2 py-0.5 rounded uppercase">${p.badge}</span>
+                            <span class="absolute top-2 right-2 bg-darkbg/80 text-accentblue text-[10px] font-bold px-2 py-0.5 rounded">18+ ONLY</span>
+                            <img src="${p.image}" class="w-full h-44 object-cover rounded-xl mt-2">
+                        </div>
+                        <div>
+                            <span class="text-[10px] text-accentblue uppercase font-bold">${p.category}</span>
+                            <h3 class="font-bold text-white text-base">${p.name}</h3>
+                            <div class="text-amber-400 text-xs">★ ${p.rating}</div>
+                        </div>
+                        <div class="flex justify-between items-center pt-2 border-t border-bordercolor">
+                            <div>
+                                <span class="text-xs text-gray-500 line-through">$${p.originalPrice}</span>
+                                <span class="font-display font-black text-lg text-accentblue">$${p.price.toFixed(2)}</span>
+                            </div>
+                            <button onclick="addToCart(${p.id})" class="px-4 py-2 gradient-btn text-darkbg font-bold text-xs rounded-xl"><i class="fa-solid fa-cart-shopping"></i></button>
                         </div>
                     </div>`;
             });
         }
-        function setCategory(cat) {
-            currentCategory = cat;
-            renderProducts(cat === 'all' ? products : products.filter(p => p.category === cat));
-        }
-        function filterProducts() {
-            const q = document.getElementById('search-input').value.toLowerCase();
-            renderProducts(products.filter(p => p.name.toLowerCase().includes(q)));
-        }
-        function openModal(id) {
-            const p = products.find(item => item.id === id);
-            document.getElementById('modal-content').innerHTML = `
-                <h2 class="font-cyber font-bold text-xl">${p.name}</h2>
-                <p class="text-gray-400 text-sm">${p.desc}</p>
-                <button onclick="addToCart(${p.id}); closeModal();" class="w-full py-3 cyber-gradient text-cyberdark font-cyber rounded-xl font-bold">Agregar ($${p.price} MXN)</button>`;
-            document.getElementById('product-modal').classList.remove('hidden');
-        }
-        function closeModal() { document.getElementById('product-modal').classLi
+
+        function setCateg
