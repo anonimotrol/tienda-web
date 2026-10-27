@@ -70,10 +70,11 @@
 
     <!-- ANNOUNCEMENT BAR -->
     <div class="bg-gradient-to-r from-accentpurple via-accentpink to-accentblue text-white text-xs py-2 px-4 text-center font-bold tracking-widest uppercase shadow-lg">
-        🔥 ENVÍOS GRATIS EN COMPRAS MAYORES A $500 | 🔞 SOLO MAYORES DE EDAD <br>[🎁 CLICK AQUÍ PARA TU CÓDIGO DEL 90% DESCUENTO]
+        🔥 ENVÍOS GRATIS EN COMPRAS MAYORES A $500 | 🔞 SOLO MAYORES DE EDAD <br>
+        <span onclick="openFreeVapeModal()" class="cursor-pointer underline">[🎁 CLICK AQUÍ PARA TU CÓDIGO DEL 90% DESCUENTO]</span>
     </div>
 
-    <!-- HEADER -->
+    <!-- HEADER / NAVIGATION -->
     <header class="sticky top-0 z-40 glass-panel border-b border-bordercolor">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('catalog')">
@@ -86,12 +87,16 @@
                 </div>
             </div>
 
+            <!-- Desktop Nav -->
             <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold tracking-wide">
                 <button onclick="switchTab('catalog')" id="tab-btn-catalog" class="text-accentblue transition-colors flex items-center space-x-2">
                     <i class="fa-solid fa-store"></i><span>Catálogo</span>
                 </button>
                 <button onclick="switchTab('categories')" id="tab-btn-categories" class="text-gray-400 hover:text-accentblue transition-colors flex items-center space-x-2">
                     <i class="fa-solid fa-layer-group"></i><span>Categorías</span>
+                </button>
+                <button onclick="switchTab('support')" id="tab-btn-support" class="text-gray-400 hover:text-accentblue transition-colors flex items-center space-x-2">
+                    <i class="fa-solid fa-headset"></i><span>Soporte</span>
                 </button>
                 <button onclick="openVipModal()" class="text-amber-400 hover:text-amber-300 transition-colors flex items-center space-x-2">
                     <i class="fa-solid fa-crown"></i><span>VIP Club</span>
@@ -108,11 +113,13 @@
                 </button>
             </div>
         </div>
-
+        
+        <!-- Mobile Navigation Menu -->
         <div id="mobile-menu" class="hidden md:hidden glass-panel border-b border-bordercolor px-4 py-4 space-y-3 text-sm font-semibold">
-            <button onclick="switchTab('catalog'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-accentblue">Catálogo</button>
-            <button onclick="switchTab('categories'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-gray-300">Categorías</button>
-            <button onclick="openVipModal(); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-amber-400">VIP Club</button>
+            <button onclick="switchTab('catalog'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-accentblue"><i class="fa-solid fa-store mr-2"></i> Catálogo</button>
+            <button onclick="switchTab('categories'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-gray-300"><i class="fa-solid fa-layer-group mr-2"></i> Categorías</button>
+            <button onclick="switchTab('support'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-gray-300"><i class="fa-solid fa-headset mr-2"></i> Soporte</button>
+            <button onclick="openVipModal(); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-amber-400"><i class="fa-solid fa-crown mr-2"></i> VIP Club</button>
         </div>
     </header>
 
@@ -130,9 +137,14 @@
                     <p class="text-gray-400 text-sm sm:text-base leading-relaxed">
                         Descubre la tecnología de vaporización más avanzada. Vapes desechables, Pods de recarga y E-liquids exóticos con entrega rápida ultrasónica.
                     </p>
-                    <button onclick="document.getElementById('catalog-search').scrollIntoView({behavior: 'smooth'})" class="px-6 py-3.5 rounded-xl gradient-btn text-darkbg font-bold tracking-wider shadow-lg">
-                        Explorar Catálogo →
-                    </button>
+                    <div class="flex flex-wrap gap-4">
+                        <button onclick="document.getElementById('catalog-search').scrollIntoView({behavior: 'smooth'})" class="px-6 py-3.5 rounded-xl gradient-btn text-darkbg font-bold tracking-wider shadow-lg">
+                            Explorar Catálogo →
+                        </button>
+                        <button onclick="openFreeVapeModal()" class="px-6 py-3.5 rounded-xl bg-surface border border-accentpink/40 text-accentpink font-bold tracking-wider hover:bg-accentpink/10 transition-all">
+                            🎁 Reclamar Vape Gratis
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -180,6 +192,7 @@
 
             <!-- Buscador y Grid de Productos -->
             <div id="catalog-search" class="space-y-6 pt-4">
+                <h3 class="font-display font-bold text-xl text-white">Lo más Vendido de la Semana</h3>
                 <div class="w-full relative">
                     <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
                     <input type="text" id="search-input" oninput="filterProducts()" placeholder="Buscar dispositivo o sabor..." class="w-full bg-surface border border-bordercolor rounded-xl pl-12 pr-4 py-3 text-sm focus:outline-none focus:border-accentblue text-white placeholder-gray-500">
@@ -190,47 +203,70 @@
 
         <!-- VISTA CATEGORÍAS -->
         <div id="tab-categories" class="hidden space-y-8">
-            <h2 class="font-display font-black text-3xl text-white">Todas las Categorías</h2>
+            <h2 class="font-display font-black text-3xl text-white">Categorías Completas</h2>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <div onclick="switchTab('catalog'); setCategory('vape');" class="glass-panel p-6 rounded-2xl border border-bordercolor cursor-pointer space-y-2">
+                <div onclick="switchTab('catalog'); setCategory('vape');" class="glass-panel p-6 rounded-2xl border border-bordercolor cursor-pointer space-y-2 hover:border-accentblue transition-all">
                     <h3 class="font-bold text-white text-lg">Vapes 10K - 30K Puffs</h3>
                     <p class="text-gray-400 text-sm">Dispositivos de alta duración con pantallas inteligentes.</p>
                 </div>
-                <div onclick="switchTab('catalog'); setCategory('pod');" class="glass-panel p-6 rounded-2xl border border-bordercolor cursor-pointer space-y-2">
+                <div onclick="switchTab('catalog'); setCategory('pod');" class="glass-panel p-6 rounded-2xl border border-bordercolor cursor-pointer space-y-2 hover:border-accentpurple transition-all">
                     <h3 class="font-bold text-white text-lg">Kits de Inicio Pods</h3>
                     <p class="text-gray-400 text-sm">Equipos recargables para uso diario.</p>
                 </div>
-                <div onclick="switchTab('catalog'); setCategory('liquid');" class="glass-panel p-6 rounded-2xl border border-bordercolor cursor-pointer space-y-2">
+                <div onclick="switchTab('catalog'); setCategory('liquid');" class="glass-panel p-6 rounded-2xl border border-bordercolor cursor-pointer space-y-2 hover:border-accentpink transition-all">
                     <h3 class="font-bold text-white text-lg">Sales de Nicotina</h3>
                     <p class="text-gray-400 text-sm">E-liquids concentrados de 30ml o 50ml.</p>
                 </div>
             </div>
         </div>
+
+        <!-- VISTA SOPORTE -->
+        <div id="tab-support" class="hidden space-y-8 max-w-3xl mx-auto">
+            <h2 class="font-display font-black text-3xl text-white">Centro de Soporte & Ayuda</h2>
+            <div class="space-y-4">
+                <div class="glass-panel p-5 rounded-2xl border border-bordercolor space-y-2">
+                    <h3 class="font-bold text-white text-base"><i class="fa-solid fa-circle-question text-accentblue mr-2"></i> Preguntas Frecuentes</h3>
+                    <p class="text-gray-400 text-sm">Consulta dudas sobre entregas personales, tiempos y autenticidad de equipos.</p>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl border border-bordercolor space-y-2">
+                    <h3 class="font-bold text-white text-base"><i class="fa-solid fa-truck-fast text-accentblue mr-2"></i> Rastreo de Envíos</h3>
+                    <p class="text-gray-400 text-sm">Ingresa tu número de guía generado tras tu simulación de compra para rastrear el pedido.</p>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl border border-bordercolor space-y-2">
+                    <h3 class="font-bold text-white text-base"><i class="fa-solid fa-shield-halved text-accentblue mr-2"></i> Garantía Neón</h3>
+                    <p class="text-gray-400 text-sm">Todos nuestros dispositivos cuentan con reemplazo directo ante defectos de fábrica en los primeros 7 días.</p>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- FOOTER -->
-    <footer class="glass-panel border-t border-bordercolor mt-auto py-8 px-4 text-xs text-gray-400 space-y-4">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div>
-                <span class="font-display font-black text-lg text-white">NEOVAPE</span>
-                <p class="mt-1">Tienda conceptual de vaporizadores modernos y sabores premium con temática futurista.</p>
+    <footer class="glass-panel border-t border-bordercolor mt-auto py-10 px-4 text-xs text-gray-400 space-y-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="space-y-2">
+                <span class="font-display font-black text-xl text-white">NEOVAPE</span>
+                <p>Tienda conceptual de vaporizadores modernos y sabores premium con temática futurista.</p>
             </div>
-            <div>
+            <div class="space-y-1">
                 <h4 class="font-bold text-white mb-2 uppercase text-[11px] tracking-wider">Soporte</h4>
-                <p>Preguntas Frecuentes</p>
-                <p>Rastreo de Envíos</p>
-                <p>Garantía Neón</p>
+                <p class="cursor-pointer hover:text-white" onclick="switchTab('support')">Preguntas Frecuentes</p>
+                <p class="cursor-pointer hover:text-white" onclick="switchTab('support')">Rastreo de Envíos</p>
+                <p class="cursor-pointer hover:text-white" onclick="switchTab('support')">Garantía Neón</p>
             </div>
-            <div>
+            <div class="space-y-1">
                 <h4 class="font-bold text-white mb-2 uppercase text-[11px] tracking-wider">Aviso Legal</h4>
                 <p>Venta exclusiva a mayores de 18 años. El consumo de nicotina es adictivo. Muestra con fines puramente interactivos e ilustrativos.</p>
             </div>
+        </div>
+        <div class="text-center border-t border-bordercolor pt-4 text-gray-500">
+            &copy; 2026 NEOVAPE CYBER LABS. Todos los derechos reservados.
         </div>
     </footer>
 
     <!-- CARRITO LATERAL -->
     <div id="cart-drawer" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden justify-end">
-        <div class="w-full max-w-md bg-darkbg border-l border-bordercolor h-full flex flex-col p-6 space-y-6">
+        <div class="w-full max-w-md bg-darkbg border-l border-bordercolor h-full flex flex-col p-6 space-y-6 shadow-2xl">
             <div class="flex items-center justify-between pb-4 border-b border-bordercolor">
                 <h3 class="font-display font-bold text-lg text-white">Tu Carrito</h3>
                 <button onclick="toggleCart()" class="text-gray-400 hover:text-white p-2"><i class="fa-solid fa-xmark text-lg"></i></button>
@@ -241,71 +277,22 @@
                     <span class="text-gray-400">TOTAL:</span>
                     <span id="cart-total" class="font-black text-accentblue">$0.00 MXN</span>
                 </div>
-                <button onclick="checkout()" class="w-full py-4 rounded-xl gradient-btn text-darkbg font-bold tracking-wider text-sm uppercase">
+                <button onclick="checkout()" class="w-full py-4 rounded-xl gradient-btn text-darkbg font-bold tracking-wider text-sm uppercase shadow-lg shadow-accentblue/20">
                     Proceder al Pago
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL VIP -->
-    <div id="vip-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
-        <div class="glass-panel max-w-md w-full rounded-3xl border border-amber-500/50 p-6 space-y-4 text-center">
-            <button onclick="closeVipModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
-            <h3 class="font-display font-bold text-xl text-white">🔑 Cofre VIP Secreto</h3>
-            <input type="text" id="vip-code" placeholder="Ingresa código VIP..." class="w-full bg-surface border border-bordercolor rounded-xl px-4 py-3 text-sm text-center text-white uppercase">
-            <button onclick="checkVip()" class="w-full py-3 rounded-xl bg-amber-500 text-darkbg font-bold text-xs uppercase">Desbloquear</button>
-        </div>
-    </div>
-
-    <!-- TOAST -->
-    <div id="toast" class="fixed bottom-6 right-6 z-50 glass-panel border border-accentblue px-6 py-3 rounded-xl text-xs font-bold text-white transform translate-y-20 opacity-0 transition-all duration-300">
-        <span id="toast-message">Notificación</span>
-    </div>
-
-    <script>
-        const products = [
-            { id: 1, name: 'CyberVapor 25K Ultra', category: 'vape', price: 499.00, originalPrice: 580, rating: 4.9, puffs: '25,000 Puffs', nicotine: '5%', desc: 'Pantalla LCD en tiempo real con indicador de batería.', image: 'https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=600', badge: 'MÁS VENDIDO' },
-            { id: 2, name: 'Neon Pod Pro X', category: 'pod', price: 450.00, originalPrice: 520, rating: 4.8, puffs: 'Kit Recargable', nicotine: 'Segun Pod', desc: 'Kit de inicio con batería de 1000mAh.', image: 'https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&q=80&w=600', badge: 'NUEVO' },
-            { id: 3, name: 'Alien Liquid Sales 30ml', category: 'liquid', price: 250.00, originalPrice: 300, rating: 5.0, puffs: 'E-Liquid 30ml', nicotine: '50mg Sales', desc: 'Sabor espacial a mora azul helada.', image: 'https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&q=80&w=600', badge: '50MG NIC' }
-        ];
-
-        let cart = [];
-
-        function switchTab(tabId) {
-            ['catalog', 'categories'].forEach(id => {
-                const el = document.getElementById(`tab-${id}`);
-                if (el) el.classList.add('hidden');
-            });
-            const active = document.getElementById(`tab-${tabId}`);
-            if (active) active.classList.remove('hidden');
-        }
-
-        function renderProducts(items) {
-            const grid = document.getElementById('products-grid');
-            grid.innerHTML = '';
-            items.forEach(p => {
-                grid.innerHTML += `
-                    <div class="glass-panel rounded-2xl overflow-hidden border border-bordercolor p-4 space-y-4">
-                        <div class="relative">
-                            <span class="absolute top-2 left-2 bg-amber-400 text-darkbg text-[10px] font-black px-2 py-0.5 rounded uppercase">${p.badge}</span>
-                            <span class="absolute top-2 right-2 bg-darkbg/80 text-accentblue text-[10px] font-bold px-2 py-0.5 rounded">18+ ONLY</span>
-                            <img src="${p.image}" class="w-full h-44 object-cover rounded-xl mt-2">
-                        </div>
-                        <div>
-                            <span class="text-[10px] text-accentblue uppercase font-bold">${p.category}</span>
-                            <h3 class="font-bold text-white text-base">${p.name}</h3>
-                            <div class="text-amber-400 text-xs">★ ${p.rating}</div>
-                        </div>
-                        <div class="flex justify-between items-center pt-2 border-t border-bordercolor">
-                            <div>
-                                <span class="text-xs text-gray-500 line-through">$${p.originalPrice}</span>
-                                <span class="font-display font-black text-lg text-accentblue">$${p.price.toFixed(2)}</span>
-                            </div>
-                            <button onclick="addToCart(${p.id})" class="px-4 py-2 gradient-btn text-darkbg font-bold text-xs rounded-xl"><i class="fa-solid fa-cart-shopping"></i></button>
-                        </div>
-                    </div>`;
-            });
-        }
-
-        function setCateg
+    <!-- MODAL VAPE GRATIS / ACERTIJO -->
+    <div id="free-vape-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="glass-panel max-w-md w-full rounded-3xl border border-accentpink/50 p-6 sm:p-8 relative space-y-6 text-center shadow-2xl">
+            <button onclick="closeFreeVapeModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <div class="space-y-3">
+                <div class="w-16 h-16 rounded-2xl bg-accentpink/20 border border-accentpink/40 text-accentpink flex items-center justify-center text-3xl mx-auto">
+                    <i class="fa-solid fa-gift"></i>
+                </div>
+                <h3 class="font-display font-bold text-2xl text-white">Reclama tu Vape Gratis</h3>
+                <p class="text-gray-400 text-sm">Resuelve el acertijo para desbloquear tu producto a $0.00:</p>
+                <div class="p-4 rounded-xl bg-surface border border-bordercolor text-accentblue text-xs font-semibold">
+      
