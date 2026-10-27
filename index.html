@@ -122,6 +122,15 @@
             padding: 15px;
         }
 
+        /* Vistas / Secciones */
+        .view-section {
+            display: none;
+        }
+
+        .view-section.active {
+            display: block;
+        }
+
         /* Buscador */
         .search-box {
             position: relative;
@@ -220,7 +229,7 @@
             border-color: var(--neon-pink);
         }
 
-        /* Banner Promocional / Mystery Box */
+        /* Banner Promocional / Punto Fijo */
         .promo-box {
             background: linear-gradient(135deg, #141124, #1f1538);
             border: 1px solid var(--neon-pink);
@@ -604,7 +613,7 @@
 
     <!-- Header -->
     <header>
-        <div class="logo-container" onclick="scrollToTop()">
+        <div class="logo-container" onclick="switchView('inicio')">
             <div class="logo">☁️ NEOVAPE</div>
             <div class="logo-sub">Cyber Labs v2.0</div>
         </div>
@@ -623,76 +632,68 @@
             <button class="close-drawer" onclick="toggleDrawer()">✕</button>
         </div>
         <div class="nav-links">
-            <a class="nav-item" onclick="toggleDrawer()">🏠 Inicio</a>
-            <a class="nav-item" onclick="toggleDrawer()">📦 Catálogo Completo</a>
-            <a class="nav-item" onclick="toggleDrawer()">💨 Vapes Desechables</a>
-            <a class="nav-item" onclick="toggleDrawer()">🔋 Pod Systems</a>
-            <a class="nav-item vip" onclick="toggleDrawer()">🔥 Secret VIP Discount (90% OFF)</a>
+            <a class="nav-item" onclick="switchView('inicio')">🏠 Inicio</a>
+            <a class="nav-item" onclick="switchView('catalogo')">📦 Catálogo Completo</a>
+            <a class="nav-item" onclick="switchView('vapes')">💨 Vapes Desechables</a>
+            <a class="nav-item" onclick="switchView('pods')">🔋 Pod Systems</a>
+            <a class="nav-item vip" onclick="switchView('vip')">🔥 Secret VIP Discount (90% OFF)</a>
         </div>
     </div>
 
-    <!-- Contenido Principal -->
-    <div class="container">
-
-        <!-- Buscador -->
-        <div class="search-box">
-            <span>🔍</span>
-            <input type="text" placeholder="Buscar en la tienda..." id="search-input" onkeyup="filterProducts()">
-        </div>
-
-        <!-- Banner Promocional / Modalidad Punto Fijo y Pedido con Redirección 1 -->
-        <div class="promo-box">
-            <span class="promo-tag">Modalidad Punto Fijo</span>
-            <div class="promo-title">Realiza tu pedido o apartado</div>
-            <div class="promo-desc">Aparta tu producto para recoger en sucursal o solicita atención directa.</div>
-            <!-- Botón 1 de Redirección a la otra página (Broma) -->
-            <a href="URL_DE_TU_PAGINA_DE_BROMA.html" target="_blank" class="btn-neon">📦 Realizar Pedido / Apartar</a>
-        </div>
-
-        <!-- Categorías Destacadas -->
-        <div class="section-header">
-            <div class="section-title">Categorías Destacadas</div>
-            <a class="see-all" onclick="filterByCategory('todos')">Ver todas →</a>
-        </div>
-
-        <div class="categories-grid">
-            <div class="cat-card" onclick="filterByCategory('Vapes')">
-                <div class="cat-icon">⚡</div>
-                <div class="cat-name">Vapes Desechables</div>
-                <div class="cat-desc">Hasta 30,000 Puffs con pantalla</div>
+    <!-- VISTA 1: INICIO -->
+    <div id="view-inicio" class="view-section active">
+        <div class="container">
+            <!-- Buscador -->
+            <div class="search-box">
+                <span>🔍</span>
+                <input type="text" placeholder="Buscar en la tienda..." id="search-input" onkeyup="filterProducts()">
             </div>
-            <div class="cat-card" onclick="filterByCategory('Pods')">
-                <div class="cat-icon">🔋</div>
-                <div class="cat-name">Sistemas Pod</div>
-                <div class="cat-desc">Recargables y compactos</div>
-            </div>
-            <div class="cat-card" onclick="filterByCategory('Liquids')">
-                <div class="cat-icon">🧪</div>
-                <div class="cat-name">E-Liquids Premium</div>
-                <div class="cat-desc">Sales de Nicotina y Base Free</div>
-            </div>
-            <div class="cat-card" style="border-color: var(--neon-pink);" onclick="filterByCategory('VIP')">
-                <div class="cat-icon">👑</div>
-                <div class="cat-name" style="color: var(--neon-pink);">Ediciones Limitadas</div>
-                <div class="cat-desc">Sabores secretos VIP 🔑</div>
-            </div>
-        </div>
 
-        <!-- Catálogo de Productos -->
-        <div class="section-header">
-            <div class="section-title">Lo más vendido de la semana</div>
-        </div>
+            <!-- Banner Promocional / Modalidad Punto Fijo y Redirección 1 -->
+            <div class="promo-box">
+                <span class="promo-tag">Modalidad Punto Fijo</span>
+                <div class="promo-title">Realiza tu pedido o apartado</div>
+                <div class="promo-desc">Aparta tu producto para recoger en sucursal o solicita atención directa.</div>
+                <!-- BOTÓN 1 DE REDIRECCIÓN (CAMBIA 'URL_DE_TU_PAGINA_DE_BROMA.html' POR TU LINK) -->
+                <a href="URL_DE_TU_PAGINA_DE_BROMA.html" target="_blank" class="btn-neon">📦 Realizar Pedido / Apartar</a>
+            </div>
 
-        <div class="products-grid" id="products-container">
-            <!-- Producto 1 -->
-            <div class="product-card" data-name="cybervapor 25k ultra" data-category="Vapes">
-                <div class="product-badge">Más Vendido</div>
-                <div class="product-age">18+ ONLY</div>
-                <div class="product-img-box">
-                    <div class="vape-mock">
-                        <div class="vape-top"></div>
-                        <div class="vape-label">VAPES</div>
-                        <div class="vape-screen">NEO 2026</div>
-                    </div>
+            <!-- Categorías Destacadas -->
+            <div class="section-header">
+                <div class="section-title">Categorías Destacadas</div>
+                <a class="see-all" onclick="switchView('catalogo')">Ver todas →</a>
+            </div>
+
+            <div class="categories-grid">
+                <div class="cat-card" onclick="switchView('vapes')">
+                    <div class="cat-icon">⚡</div>
+                    <div class="cat-name">Vapes Desechables</div>
+                    <div class="cat-desc">Hasta 30,000 Puffs con pantalla</div>
                 </div>
-                <div class="product-cate
+                <div class="cat-card" onclick="switchView('pods')">
+                    <div class="cat-icon">🔋</div>
+                    <div class="cat-name">Sistemas Pod</div>
+                    <div class="cat-desc">Recargables y compactos</div>
+                </div>
+                <div class="cat-card" onclick="switchView('catalogo')">
+                    <div class="cat-icon">🧪</div>
+                    <div class="cat-name">E-Liquids Premium</div>
+                    <div class="cat-desc">Sales de Nicotina y Base Free</div>
+                </div>
+                <div class="cat-card" style="border-color: var(--neon-pink);" onclick="switchView('vip')">
+                    <div class="cat-icon">👑</div>
+                    <div class="cat-name" style="color: var(--neon-pink);">Ediciones Limitadas</div>
+                    <div class="cat-desc">Sabores secretos VIP 🔑</div>
+                </div>
+            </div>
+
+            <!-- Catálogo Destacado -->
+            <div class="section-header">
+                <div class="section-title">Lo más vendido de la semana</div>
+            </div>
+
+            <div class="products-grid" id="products-container">
+                <!-- Producto 1 -->
+                <div class="product-card" data-name="cybervapor 25k ultra">
+                    <div class="product-badge">Más Vendido</div>
+   
