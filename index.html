@@ -275,6 +275,29 @@
             box-shadow: 0 4px 15px rgba(255, 0, 127, 0.4);
         }
 
+        /* Aviso de Punto Fijo y Fuera de Servicio en Pantalla Principal */
+        .notice-box {
+            background: rgba(255, 0, 127, 0.08);
+            border: 1px solid var(--neon-pink);
+            border-radius: 14px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .notice-title {
+            color: var(--neon-pink);
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .notice-text {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
         /* Categorías Grid */
         .section-header {
             display: flex;
@@ -553,7 +576,7 @@
 
     <!-- Banner Superior -->
     <div class="top-banner">
-        🔥 ENVIOS GRATIS EN COMPRAS MAYORES A $500 | 🔞 SOLO MAYORES DE EDAD
+        🔥 PUNTOS FIJOS Y ENVIOS | 🔞 SOLO MAYORES DE EDAD
     </div>
 
     <!-- Header -->
@@ -594,11 +617,17 @@
             <input type="text" placeholder="Buscar en la tienda...">
         </div>
 
+        <!-- Aviso oficial de Punto Fijo y Pedidos en línea fuera de servicio -->
+        <div class="notice-box">
+            <div class="notice-title">⚠️ AVISO IMPORTANTE: PEDIDOS EN LÍNEA FUERA DE SERVICIO</div>
+            <div class="notice-text">Por saturación temporal del sistema, los pedidos web están inhabilitados. Todo el proceso se realiza exclusivamente mediante <b>Punto Fijo y Apartados en sucursal</b>.</div>
+        </div>
+
         <!-- Hero Banner Principal -->
         <div class="hero-banner">
             <span class="hero-tag">NUEVA COLECCIÓN CYBER 2026</span>
             <div class="hero-title">SABORES DEL FUTURO HOY.</div>
-            <div class="hero-desc">Descubre la tecnología de vaporización más avanzada. Vapes desechables, Pods de recarga y E-liquids exóticos con entrega rápida ultrasónica.</div>
+            <div class="hero-desc">Descubre la tecnología de vaporización más avanzada con entrega directa en punto fijo autorizado.</div>
             <a href="#productos" class="btn-neon">Explorar Catálogo →</a>
             <!-- BOTÓN 1 DE REDIRECCIÓN A LA PÁGINA DE BROMA -->
             <a href="URL_DE_TU_PAGINA_DE_BROMA.html" target="_blank" class="btn-neon btn-pink" style="margin-top: 10px;">🎁 Mistery Box ($1 USD)</a>
@@ -653,26 +682,4 @@
                 <div class="product-category">Vapes</div>
                 <div class="product-name">CyberVapor 25K Ultra</div>
                 <div class="product-rating">★★★★★ <span>(4.9)</span></div>
-                <div class="product-footer">
-                    <div class="price-box">
-                        <span class="current-price">$24.99</span>
-                        <span class="old-price">$34.99</span>
-                    </div>
-                    <button class="add-cart-btn" onclick="addToCart('CyberVapor 25K Ultra', 24.99)">🛒</button>
-                </div>
-            </div>
-
-            <!-- Producto 2 -->
-            <div class="product-card">
-                <div class="product-badge new">NUEVO</div>
-                <div class="product-age">18+ ONLY</div>
-                <div class="product-img-box">
-                    <div class="vape-mock cyan">
-                        <div class="vape-top"></div>
-                        <div class="vape-label">PODS</div>
-                        <div class="vape-screen">SMART LCD</div>
-                    </div>
-                </div>
-                <div class="product-category">Pods</div>
-                <div class="product-name">Neon Pod Pro X</div>
-        
+                <div class="
