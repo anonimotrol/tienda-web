@@ -295,4 +295,184 @@
                 <h3 class="font-display font-bold text-2xl text-white">Reclama tu Vape Gratis</h3>
                 <p class="text-gray-400 text-sm">Resuelve el acertijo para desbloquear tu producto a $0.00:</p>
                 <div class="p-4 rounded-xl bg-surface border border-bordercolor text-accentblue text-xs font-semibold">
-      
+                    "Soy dulce, refrescante, roja por dentro y verde por fuera. ¿Qué sabor soy?"
+                </div>
+            </div>
+            <div class="space-y-3">
+                <input type="text" id="riddle-input" placeholder="Escribe tu respuesta (ej. SANDIA)..." class="w-full bg-surface border border-bordercolor rounded-xl px-4 py-3 text-sm text-center focus:outline-none focus:border-accentpink text-white uppercase">
+                <button onclick="checkRiddle()" class="w-full py-3.5 rounded-xl bg-accentpink text-white font-bold text-sm uppercase hover:opacity-90">
+                    Validar Cupón
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL VIP -->
+    <div id="vip-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+        <div class="glass-panel max-w-md w-full rounded-3xl border border-amber-500/50 p-6 space-y-4 text-center shadow-2xl">
+            <button onclick="closeVipModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="font-display font-bold text-xl text-white">🔑 Cofre VIP Secreto</h3>
+            <p class="text-gray-400 text-xs">Ingresa tu código VIP para desbloquear ediciones limitadas.</p>
+            <input type="text" id="vip-code" placeholder="Ingresa código..." class="w-full bg-surface border border-bordercolor rounded-xl px-4 py-3 text-sm text-center text-white uppercase">
+            <button onclick="checkVip()" class="w-full py-3 rounded-xl bg-amber-500 text-darkbg font-bold text-xs uppercase">Desbloquear</button>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 glass-panel border border-accentblue px-6 py-3 rounded-xl text-xs font-bold text-white transform translate-y-20 opacity-0 transition-all duration-300 shadow-xl">
+        <span id="toast-message">Notificación</span>
+    </div>
+
+    <script>
+        const products = [
+            { id: 1, name: 'CyberVapor 25K Ultra', category: 'vape', price: 499.00, originalPrice: 580, rating: 4.9, puffs: '25,000 Puffs', nicotine: '5%', desc: 'Pantalla LCD en tiempo real con indicador de batería.', image: 'https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=600', badge: 'MÁS VENDIDO' },
+            { id: 2, name: 'Neon Pod Pro X', category: 'pod', price: 450.00, originalPrice: 520, rating: 4.8, puffs: 'Kit Recargable', nicotine: 'Segun Pod', desc: 'Kit de inicio con batería de 1000mAh.', image: 'https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&q=80&w=600', badge: 'NUEVO' },
+            { id: 3, name: 'Alien Liquid Sales 30ml', category: 'liquid', price: 250.00, originalPrice: 300, rating: 5.0, puffs: 'E-Liquid 30ml', nicotine: '50mg Sales', desc: 'Sabor espacial a mora azul helada.', image: 'https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&q=80&w=600', badge: '50MG NIC' }
+        ];
+
+        let cart = [];
+
+        function switchTab(tabId) {
+            ['catalog', 'categories', 'support'].forEach(id => {
+                const el = document.getElementById(`tab-${id}`);
+                const btn = document.getElementById(`tab-btn-${id}`);
+                if (el) el.classList.add('hidden');
+                if (btn) btn.classList.remove('text-accentblue');
+                if (btn) btn.classList.add('text-gray-400');
+            });
+            const active = document.getElementById(`tab-${tabId}`);
+            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+            if (active) active.classList.remove('hidden');
+            if (activeBtn) {
+                activeBtn.classList.remove('text-gray-400');
+                activeBtn.classList.add('text-accentblue');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function renderProducts(items) {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
+            items.forEach(p => {
+                grid.innerHTML += `
+                    <div class="glass-panel rounded-2xl overflow-hidden border border-bordercolor p-4 space-y-4">
+                        <div class="relative">
+                            <span class="absolute top-2 left-2 bg-amber-400 text-darkbg text-[10px] font-black px-2 py-0.5 rounded uppercase">${p.badge}</span>
+                            <span class="absolute top-2 right-2 bg-darkbg/80 text-accentblue text-[10px] font-bold px-2 py-0.5 rounded">18+ ONLY</span>
+                            <img src="${p.image}" class="w-full h-44 object-cover rounded-xl mt-2">
+                        </div>
+                        <div>
+                            <span class="text-[10px] text-accentblue uppercase font-bold">${p.category}</span>
+                            <h3 class="font-bold text-white text-base">${p.name}</h3>
+                            <div class="text-amber-400 text-xs">★ ${p.rating} (4.9)</div>
+                        </div>
+                        <div class="flex justify-between items-center pt-2 border-t border-bordercolor">
+                            <div>
+                                <span class="text-xs text-gray-500 line-through">$${p.originalPrice}</span>
+                                <span class="font-display font-black text-lg text-accentblue">$${p.price.toFixed(2)}</span>
+                            </div>
+                            <button onclick="addToCart(${p.id})" class="px-4 py-2 gradient-btn text-darkbg font-bold text-xs rounded-xl shadow-md"><i class="fa-solid fa-cart-shopping"></i></button>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function setCategory(cat) {
+            switchTab('catalog');
+            renderProducts(products.filter(p => p.category === cat));
+        }
+
+        function filterProducts() {
+            const q = document.getElementById('search-input').value.toLowerCase();
+            renderProducts(products.filter(p => p.name.toLowerCase().includes(q)));
+        }
+
+        function addToCart(id) {
+            const p = products.find(i => i.id === id);
+            const ex = cart.find(i => i.id === id);
+            ex ? ex.quantity++ : cart.push({...p, quantity: 1});
+            updateCartBadge();
+            showToast(`Agregado: ${p.name}`);
+        }
+
+        function addPromoToCart(name, price) {
+            cart.push({ id: Date.now(), name: name, price: price, quantity: 1 });
+            updateCartBadge();
+            showToast(`Añadido: ${name}`);
+        }
+
+        function toggleCart() {
+            const d = document.getElementById('cart-drawer');
+            d.classList.toggle('hidden');
+            d.classList.toggle('flex');
+            renderCartItems();
+        }
+
+        function renderCartItems() {
+            const c = document.getElementById('cart-items');
+            c.innerHTML = cart.length === 0 ? '<p class="text-center text-gray-500 py-10">Tu carrito está vacío</p>' : '';
+            let total = 0;
+            cart.forEach(i => {
+                total += i.price * i.quantity;
+                c.innerHTML += `<div class="flex justify-between items-center glass-panel p-3 rounded-xl">
+                    <span class="text-xs text-white font-bold">${i.name} x${i.quantity}</span>
+                    <span class="text-xs text-accentblue font-bold">$${(i.price * i.quantity).toFixed(2)}</span>
+                </div>`;
+            });
+            document.getElementById('cart-total').innerText = `$${total.toFixed(2)} MXN`;
+        }
+
+        function updateCartBadge() {
+            const b = document.getElementById('cart-badge');
+            const t = cart.reduce((s, i) => s + i.quantity, 0);
+            t > 0 ? (b.innerText = t, b.classList.remove('hidden')) : b.classList.add('hidden');
+        }
+
+        function checkout() {
+            if(cart.length === 0) return showToast('Agrega productos al carrito');
+            showToast('✅ ¡Pedido confirmado con éxito!');
+            cart = [];
+            updateCartBadge();
+            toggleCart();
+        }
+
+        function openFreeVapeModal() { document.getElementById('free-vape-modal').classList.remove('hidden'); }
+        function closeFreeVapeModal() { document.getElementById('free-vape-modal').classList.add('hidden'); }
+        function checkRiddle() {
+            const val = document.getElementById('riddle-input').value.toUpperCase().trim();
+            if(val.includes('SANDIA') || val.includes('FRESA')) {
+                addPromoToCart('Vape Gratis - Premio Acertijo', 0.00);
+                closeFreeVapeModal();
+                showToast('🎉 ¡Acertijo resuelto! Producto $0.00 agregado');
+            } else {
+                showToast('❌ Respuesta incorrecta');
+            }
+        }
+
+        function openVipModal() { document.getElementById('vip-modal').classList.remove('hidden'); }
+        function closeVipModal() { document.getElementById('vip-modal').classList.add('hidden'); }
+        function checkVip() {
+            if(document.getElementById('vip-code').value.toUpperCase() === 'VIP') {
+                addPromoToCart('Sabor Secreto VIP Limitado', 600);
+                closeVipModal();
+                showToast('🔑 ¡Desbloqueado con éxito!');
+            } else {
+                showToast('❌ Código incorrecto');
+            }
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = msg;
+            t.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => t.classList.add('translate-y-20', 'opacity-0'), 2500);
+        }
+
+        renderProducts(products);
+    </script>
+</body>
+</html>
