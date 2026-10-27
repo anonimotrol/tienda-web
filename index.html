@@ -50,19 +50,8 @@
             background: linear-gradient(135deg, #00d2ff 0%, #9d00ff 100%);
         }
         .glass-panel {
-            background: rgba(17, 19, 25, 0.85);
-            backdrop-filter: blur(16px);
+            background: rgba(17, 19, 25, 0.95);
             border: 1px solid rgba(255, 255, 255, 0.07);
-        }
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #08090d;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #222736;
-            border-radius: 4px;
         }
     </style>
 </head>
@@ -75,7 +64,7 @@
     </div>
 
     <!-- HEADER / NAVIGATION -->
-    <header class="sticky top-0 z-40 glass-panel border-b border-bordercolor">
+    <header class="sticky top-0 z-30 glass-panel border-b border-bordercolor">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-3 cursor-pointer" onclick="setCategory('all')">
                 <div class="w-10 h-10 rounded-xl gradient-btn flex items-center justify-center shadow-lg shadow-accentblue/20">
@@ -92,9 +81,6 @@
                 <button onclick="setCategory('all')" class="text-accentblue transition-colors flex items-center space-x-2">
                     <i class="fa-solid fa-store"></i><span>Inicio</span>
                 </button>
-                <button onclick="document.getElementById('catalog-search').scrollIntoView({behavior: 'smooth'})" class="text-gray-400 hover:text-accentblue transition-colors flex items-center space-x-2">
-                    <i class="fa-solid fa-box-open"></i><span>Catálogo Completo</span>
-                </button>
                 <button onclick="setCategory('vape')" class="text-gray-400 hover:text-accentblue transition-colors flex items-center space-x-2">
                     <i class="fa-solid fa-bolt"></i><span>Vapes Desechables</span>
                 </button>
@@ -102,7 +88,7 @@
                     <i class="fa-solid fa-compact-disc"></i><span>Pod Systems</span>
                 </button>
                 <button onclick="openVipModal()" class="text-amber-400 hover:text-amber-300 transition-colors flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30">
-                    <i class="fa-solid fa-crown"></i><span>Secret VIP Discount (90% OFF)</span>
+                    <i class="fa-solid fa-crown"></i><span>Secret VIP Discount</span>
                 </button>
             </nav>
 
@@ -120,7 +106,6 @@
         <!-- Mobile Navigation Menu -->
         <div id="mobile-menu" class="hidden md:hidden glass-panel border-b border-bordercolor px-4 py-4 space-y-3 text-sm font-semibold">
             <button onclick="setCategory('all'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-accentblue"><i class="fa-solid fa-store mr-2"></i> Inicio</button>
-            <button onclick="document.getElementById('catalog-search').scrollIntoView({behavior: 'smooth'}); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-gray-300"><i class="fa-solid fa-box-open mr-2"></i> Catálogo Completo</button>
             <button onclick="setCategory('vape'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-gray-300"><i class="fa-solid fa-bolt mr-2"></i> Vapes Desechables</button>
             <button onclick="setCategory('pod'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg hover:bg-surface text-gray-300"><i class="fa-solid fa-compact-disc mr-2"></i> Pod Systems</button>
             <button onclick="openVipModal(); toggleMobileMenu();" class="block w-full text-left py-2 px-3 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400"><i class="fa-solid fa-crown mr-2"></i> Secret VIP Discount</button>
@@ -150,36 +135,6 @@
             </div>
         </div>
 
-        <!-- CATEGORÍAS DESTACADAS GRID -->
-        <div class="space-y-4 pt-4">
-            <div class="flex justify-between items-center">
-                <h2 class="font-display font-bold text-2xl text-white">Categorías Destacadas</h2>
-                <span onclick="setCategory('all')" class="text-accentblue text-xs font-bold cursor-pointer hover:underline">Ver todas →</span>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div onclick="setCategory('vape')" class="glass-panel p-6 rounded-2xl border border-bordercolor hover:border-accentblue transition-all cursor-pointer space-y-3">
-                    <div class="w-10 h-10 rounded-xl bg-accentblue/10 text-accentblue flex items-center justify-center text-lg"><i class="fa-solid fa-cloud"></i></div>
-                    <h3 class="font-bold text-white text-base">Vapes Desechables</h3>
-                    <p class="text-gray-400 text-xs">Hasta 25,000 Puffs con pantalla</p>
-                </div>
-                <div onclick="setCategory('pod')" class="glass-panel p-6 rounded-2xl border border-bordercolor hover:border-accentpurple transition-all cursor-pointer space-y-3">
-                    <div class="w-10 h-10 rounded-xl bg-accentpurple/10 text-accentpurple flex items-center justify-center text-lg"><i class="fa-solid fa-compact-disc"></i></div>
-                    <h3 class="font-bold text-white text-base">Sistemas Pod</h3>
-                    <p class="text-gray-400 text-xs">Recargables y compactos</p>
-                </div>
-                <div onclick="setCategory('liquid')" class="glass-panel p-6 rounded-2xl border border-bordercolor hover:border-accentpink transition-all cursor-pointer space-y-3">
-                    <div class="w-10 h-10 rounded-xl bg-accentpink/10 text-accentpink flex items-center justify-center text-lg"><i class="fa-solid fa-vial"></i></div>
-                    <h3 class="font-bold text-white text-base">E-Liquids Premium</h3>
-                    <p class="text-gray-400 text-xs">Sales de Nicotina y Base Free</p>
-                </div>
-                <div onclick="openVipModal()" class="glass-panel p-6 rounded-2xl border border-amber-500/40 hover:border-amber-400 transition-all cursor-pointer space-y-3">
-                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-lg"><i class="fa-solid fa-crown"></i></div>
-                    <h3 class="font-bold text-white text-base">Ediciones Limitadas</h3>
-                    <p class="text-gray-400 text-xs">Sabores secretos VIP 🔑</p>
-                </div>
-            </div>
-        </div>
-
         <!-- BUSCADOR Y PRODUCTOS -->
         <div id="catalog-search" class="space-y-6 pt-4">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -203,50 +158,33 @@
 
     <!-- FOOTER -->
     <footer class="glass-panel border-t border-bordercolor mt-auto py-10 px-4 text-xs text-gray-400 space-y-6">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="space-y-2">
-                <span class="font-display font-black text-xl text-white">NEOVAPE</span>
-                <p>Tienda conceptual de vaporizadores modernos y sabores premium con temática futurista.</p>
-            </div>
-            <div class="space-y-1">
-                <h4 class="font-bold text-white mb-2 uppercase text-[11px] tracking-wider">Soporte</h4>
-                <p>Preguntas Frecuentes</p>
-                <p>Rastreo de Envíos</p>
-                <p>Garantía Neón</p>
-            </div>
-            <div class="space-y-1">
-                <h4 class="font-bold text-white mb-2 uppercase text-[11px] tracking-wider">Aviso Legal</h4>
-                <p>Venta exclusiva a mayores de 18 años. El consumo de nicotina es adictivo. Muestra con fines puramente interactivos e ilustrativos.</p>
-            </div>
-        </div>
-        <div class="text-center border-t border-bordercolor pt-4 text-gray-500">
-            &copy; 2026 NEOVAPE CYBER LABS. Todos los derechos reservados.
+        <div class="max-w-7xl mx-auto text-center space-y-2">
+            <span class="font-display font-black text-xl text-white">NEOVAPE CYBER LABS v2.0</span>
+            <p>Venta exclusiva a mayores de 18 años. Entrega personal inmediata en tu zona.</p>
+            <p class="text-gray-500">&copy; 2026 NEOVAPE CYBER LABS. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <!-- CARRITO LATERAL ("Tu Carrito Neón") -->
-    <div id="cart-drawer" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden justify-end">
-        <div class="w-full max-w-md bg-darkbg border-l border-bordercolor h-full flex flex-col p-6 space-y-6 shadow-2xl">
+    <!-- CARRITO LATERAL (OCULTO POR DEFECTO SIN BLOQUEAR PANTALLA) -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 bg-black/80 hidden justify-end pointer-events-none">
+        <div id="cart-content-box" class="w-full max-w-md bg-darkbg border-l border-bordercolor h-full flex flex-col p-6 space-y-6 shadow-2xl pointer-events-auto">
             <div class="flex items-center justify-between pb-4 border-b border-bordercolor">
                 <div class="flex items-center space-x-2 text-accentblue">
                     <i class="fa-solid fa-bag-shopping text-lg"></i>
                     <h3 class="font-display font-bold text-lg text-white">Tu Carrito Neón</h3>
                 </div>
-                <button onclick="toggleCart()" class="text-gray-400 hover:text-white p-2"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <button onclick="toggleCart()" class="text-gray-400 hover:text-white p-2 text-lg"><i class="fa-solid fa-xmark"></i></button>
             </div>
 
-            <!-- Input código de descuento -->
             <div class="space-y-2 bg-surface p-3 rounded-xl border border-bordercolor">
                 <div class="flex gap-2">
-                    <input type="text" id="discount-code" placeholder="Código de Descuento (ej: PRANK90)" class="w-full bg-darkbg border border-bordercolor rounded-lg px-3 py-2 text-xs text-white uppercase focus:outline-none focus:border-accentblue">
-                    <button onclick="applyDiscount()" class="px-4 py-2 bg-accentblue/20 border border-accentblue text-accentblue text-xs font-bold rounded-lg hover:bg-accentblue hover:text-darkbg transition-all">Aplicar</button>
+                    <input type="text" id="discount-code" placeholder="Código (ej: PRANK90)" class="w-full bg-darkbg border border-bordercolor rounded-lg px-3 py-2 text-xs text-white uppercase focus:outline-none focus:border-accentblue">
+                    <button onclick="applyDiscount()" class="px-4 py-2 bg-accentblue/20 border border-accentblue text-accentblue text-xs font-bold rounded-lg">Aplicar</button>
                 </div>
             </div>
 
-            <!-- Items del carrito -->
             <div id="cart-items" class="flex-grow overflow-y-auto space-y-3"></div>
 
-            <!-- Resumen y total -->
             <div class="border-t border-bordercolor pt-4 space-y-3 text-xs">
                 <div class="flex justify-between text-gray-400">
                     <span>Subtotal:</span>
@@ -260,43 +198,115 @@
                     <span class="text-gray-300 font-bold">Total:</span>
                     <span id="cart-total" class="font-black text-accentblue text-lg">$0.00 MXN</span>
                 </div>
-                <button onclick="checkout()" class="w-full py-4 rounded-xl gradient-btn text-darkbg font-bold tracking-wider text-xs uppercase shadow-lg shadow-accentblue/20">
+                <button onclick="checkout()" class="w-full py-4 rounded-xl gradient-btn text-darkbg font-bold tracking-wider text-xs uppercase shadow-lg">
                     🔒 Proceder al Pago Seguro
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL VAPE GRATIS / ACERTIJO -->
-    <div id="free-vape-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
-        <div class="glass-panel max-w-md w-full rounded-3xl border border-accentpink/50 p-6 sm:p-8 relative space-y-6 text-center shadow-2xl">
-            <button onclick="closeFreeVapeModal()" class="absolute top-6 right-6 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
-            <div class="space-y-3">
-                <div class="w-16 h-16 rounded-2xl bg-accentpink/20 border border-accentpink/40 text-accentpink flex items-center justify-center text-3xl mx-auto">
-                    <i class="fa-solid fa-gift"></i>
-                </div>
-                <h3 class="font-display font-bold text-2xl text-white">Reclama tu Vape Gratis</h3>
-                <p class="text-gray-400 text-sm">Resuelve el acertijo para desbloquear tu cupón:</p>
-                <div class="p-4 rounded-xl bg-surface border border-bordercolor text-accentblue text-xs font-semibold">
-                    "Soy dulce, refrescante, roja por dentro y verde por fuera. ¿Qué sabor soy?"
-                </div>
+    <!-- MODAL VAPE GRATIS -->
+    <div id="free-vape-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 hidden pointer-events-none">
+        <div class="glass-panel max-w-md w-full rounded-3xl border border-accentpink/50 p-6 relative space-y-6 text-center shadow-2xl pointer-events-auto">
+            <button onclick="closeFreeVapeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="font-display font-bold text-2xl text-white">Reclama tu Vape Gratis</h3>
+            <p class="text-gray-400 text-sm">Resuelve el acertijo:</p>
+            <div class="p-3 rounded-xl bg-surface border border-bordercolor text-accentblue text-xs font-semibold">
+                "Soy dulce, refrescante, roja por dentro y verde por fuera. ¿Qué sabor soy?"
             </div>
-            <div class="space-y-3">
-                <input type="text" id="riddle-input" placeholder="Escribe tu respuesta (ej. SANDIA)..." class="w-full bg-surface border border-bordercolor rounded-xl px-4 py-3 text-sm text-center focus:outline-none focus:border-accentpink text-white uppercase">
-                <button onclick="checkRiddle()" class="w-full py-3.5 rounded-xl bg-accentpink text-white font-bold text-sm uppercase hover:opacity-90">
-                    Validar Cupón
-                </button>
-            </div>
+            <input type="text" id="riddle-input" placeholder="Respuesta..." class="w-full bg-surface border border-bordercolor rounded-xl px-4 py-3 text-sm text-center text-white uppercase">
+            <button onclick="checkRiddle()" class="w-full py-3 rounded-xl bg-accentpink text-white font-bold text-sm uppercase">Validar</button>
         </div>
     </div>
 
     <!-- MODAL VIP -->
-    <div id="vip-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
-        <div class="glass-panel max-w-md w-full rounded-3xl border border-amber-500/50 p-6 space-y-4 text-center shadow-2xl">
+    <div id="vip-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 hidden pointer-events-none">
+        <div class="glass-panel max-w-md w-full rounded-3xl border border-amber-500/50 p-6 relative space-y-4 text-center shadow-2xl pointer-events-auto">
             <button onclick="closeVipModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
             <h3 class="font-display font-bold text-xl text-white">🔑 Cofre VIP Secreto</h3>
-            <p class="text-gray-400 text-xs">Ingresa tu código VIP para desbloquear descuentos especiales.</p>
-            <input type="text" id="vip-code" placeholder="Ingresa código..." class="w-full bg-surface border border-bordercolor rounded-xl px-4 py-3 text-sm text-center text-white uppercase">
+            <input type="text" id="vip-code" placeholder="Código VIP..." class="w-full bg-surface border border-bordercolor rounded-xl px-4 py-3 text-sm text-center text-white uppercase">
             <button onclick="checkVip()" class="w-full py-3 rounded-xl bg-amber-500 text-darkbg font-bold text-xs uppercase">Desbloquear</button>
         </div>
-   
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 glass-panel border border-accentblue px-6 py-3 rounded-xl text-xs font-bold text-white opacity-0 transition-opacity duration-300 pointer-events-none">
+        <span id="toast-message">Notificación</span>
+    </div>
+
+    <script>
+        const products = [
+            { id: 1, name: 'CyberVapor 25K Ultra', category: 'vape', price: 450.00, originalPrice: 520.00, rating: 4.9, puffs: '25,000 Puffs', desc: 'Pantalla HD curvada con indicador de e-liquid y batería. Entrega inmediata en punto medio.', image: 'https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=600', badge: 'MÁS VENDIDO' },
+            { id: 2, name: 'Vortex Puff 15,000', category: 'vape', price: 380.00, originalPrice: 450.00, rating: 4.7, puffs: '15,000 Puffs', desc: 'Diseño compacto y ergonómico con sabores intensos.', image: 'https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&q=80&w=600', badge: 'IN STOCK' },
+            { id: 3, name: 'Neon Pod Pro X', category: 'pod', price: 325.00, originalPrice: 399.99, rating: 4.8, puffs: 'Kit Recargable', desc: 'Sistema pod recargable de alto rendimiento y carga rápida.', image: 'https://images.unsplash.com/photo-1527661591475-527312dd65f5?auto=format&fit=crop&q=80&w=600', badge: 'ENTREGA LOCAL' }
+        ];
+
+        let cart = [];
+        let discountMultiplier = 1;
+
+        function toggleMobileMenu() {
+            const m = document.getElementById('mobile-menu');
+            m.classList.toggle('hidden');
+        }
+
+        function renderProducts(items) {
+            const grid = document.getElementById('products-grid');
+            if(!grid) return;
+            grid.innerHTML = '';
+            items.forEach(p => {
+                grid.innerHTML += `
+                    <div class="glass-panel rounded-2xl overflow-hidden border border-bordercolor p-4 space-y-4">
+                        <div class="relative">
+                            <span class="absolute top-2 left-2 bg-accentpink text-darkbg text-[10px] font-black px-2 py-0.5 rounded uppercase">${p.badge}</span>
+                            <span class="absolute top-2 right-2 bg-darkbg/80 text-accentblue text-[10px] font-bold px-2 py-0.5 rounded">18+ ONLY</span>
+                            <img src="${p.image}" class="w-full h-44 object-cover rounded-xl mt-2">
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center text-[10px] text-accentblue font-bold uppercase">
+                                <span>${p.category}</span>
+                                <span class="text-amber-400">★ ${p.rating}</span>
+                            </div>
+                            <h3 class="font-bold text-white text-base mt-1">${p.name}</h3>
+                            <p class="text-gray-400 text-xs mt-1">${p.desc}</p>
+                        </div>
+                        <div class="flex justify-between items-center pt-3 border-t border-bordercolor">
+                            <div>
+                                <span class="text-xs text-gray-500 line-through">$${p.originalPrice.toFixed(2)}</span>
+                                <span class="font-display font-black text-lg text-accentblue ml-1">$${p.price.toFixed(2)} MXN</span>
+                            </div>
+                            <button onclick="addToCart(${p.id})" class="px-4 py-2.5 gradient-btn text-darkbg font-bold text-xs rounded-xl shadow-md">
+                                <i class="fa-solid fa-cart-shopping"></i> Agregar
+                            </button>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function setCategory(cat) {
+            ['all', 'vape', 'pod'].forEach(c => {
+                const btn = document.getElementById(`btn-cat-${c}`);
+                if(btn) {
+                    btn.className = c === cat ? "px-3 py-1.5 rounded-lg bg-accentblue/20 border border-accentblue text-accentblue text-xs font-bold" : "px-3 py-1.5 rounded-lg bg-surface border border-bordercolor text-gray-400 text-xs font-bold";
+                }
+            });
+            renderProducts(cat === 'all' ? products : products.filter(p => p.category === cat));
+        }
+
+        function filterProducts() {
+            const q = document.getElementById('search-input').value.toLowerCase();
+            renderProducts(products.filter(p => p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)));
+        }
+
+        function addToCart(id) {
+            const p = products.find(i => i.id === id);
+            const ex = cart.find(i => i.id === id);
+            ex ? ex.quantity++ : cart.push({...p, quantity: 1});
+            updateCartBadge();
+            showToast(`Agregado: ${p.name}`);
+        }
+
+        function toggleCart() {
+            const d = document.getElementById('cart-drawer');
+            d.classList.toggle('hidden');
+            d.classList.toggle('flex');
+            d.classList.toggl
